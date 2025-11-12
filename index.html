@@ -87,8 +87,16 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.1); 
       width: 100%;
       transition: 0.3s;
+      text-align: center;
     }
-    .app-card h2 { margin-top: 0; }
+    .app-card h2 { margin-top: 10px; }
+    .app-card img.app-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      display: block;
+      margin: 0 auto 10px auto;
+    }
     .btn { 
       display: inline-block; 
       padding: 10px 20px; 
@@ -134,6 +142,7 @@
   <div class="container">
 
     <div class="app-card" data-category="educacion">
+      <img src="ruta-icono-biblia.png" alt="Biblia Universal" class="app-icon">
       <h2>Biblia Universal</h2>
       <p>Lee, escucha y comparte la Palabra de Dios con una interfaz limpia, moderna y sin distracciones.</p>
       <a href="https://play.google.com/store/apps/details?id=com.tuapp" class="btn google">Google Play</a>
@@ -141,6 +150,7 @@
     </div>
 
     <div class="app-card" data-category="musica">
+      <img src="ruta-icono-musicflow.png" alt="MusicFlow" class="app-icon">
       <h2>MusicFlow</h2>
       <p>Escucha tu música favorita sin conexión con una interfaz moderna y fluida.</p>
       <a href="#" class="btn google">Google Play</a>
@@ -148,6 +158,7 @@
     </div>
 
     <div class="app-card" data-category="herramientas">
+      <img src="ruta-icono-smartcleaner.png" alt="Smart Cleaner" class="app-icon">
       <h2>Smart Cleaner</h2>
       <p>Optimiza tu teléfono con limpieza rápida y mejora el rendimiento con un solo toque.</p>
       <a href="#" class="btn google">Google Play</a>
@@ -155,6 +166,7 @@
     </div>
 
     <div class="app-card" data-category="productividad">
+      <img src="ruta-icono-taskmaster.png" alt="TaskMaster" class="app-icon">
       <h2>TaskMaster</h2>
       <p>Administra tus tareas diarias fácilmente con notificaciones inteligentes y diseño elegante.</p>
       <a href="#" class="btn google">Google Play</a>
