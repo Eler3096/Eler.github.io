@@ -49,13 +49,7 @@ p{color:red;}
   <p id="msg"></p>
 </div>
 
-<!-- 🔥 SDK DE FIREBASE (obligatorio) -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
-
-<!-- 🔥 TU configuración -->
+<!-- Scripts Firebase SIEMPRE antes -->
 <script src="firebase.js"></script>
 
 <script>
@@ -63,9 +57,13 @@ function login(){
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  auth.signInWithEmailAndPassword(email,password)
-  .then(()=>location.href="admin.html")
-  .catch(e=>document.getElementById("msg").textContent=e.message);
+  auth.signInWithEmailAndPassword(email, password)
+    .then(() => {
+      location.href = "admin.html";
+    })
+    .catch(e => {
+      document.getElementById("msg").textContent = e.message;
+    });
 }
 </script>
 
