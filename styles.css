@@ -318,3 +318,166 @@ body {
     padding: 14px 12px 30px;
   }
 }
+
+/* Tarjeta simple estilo Play Store */
+.play-card {
+  display:flex;
+  gap:10px;
+  padding:10px;
+  border-radius:12px;
+  background:#020617;
+  border:1px solid rgba(51,65,85,0.9);
+  cursor:pointer;
+  transition:0.15s ease;
+}
+.play-card:hover {
+  transform:translateY(-2px);
+  box-shadow:0 12px 24px rgba(15,23,42,0.9);
+  border-color:rgba(59,130,246,0.9);
+}
+.play-icon {
+  width:64px;
+  height:64px;
+  border-radius:16px;
+  object-fit:cover;
+}
+.play-info {
+  flex:1;
+}
+.play-name {
+  font-size:0.95rem;
+  font-weight:600;
+  margin-bottom:2px;
+}
+.play-line1 {
+  font-size:0.78rem;
+  color:#a5b4fc;
+}
+.play-line2 {
+  font-size:0.78rem;
+  color:#9ca3af;
+}
+
+/* Overlay detalle */
+.overlay {
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:20px 10px;
+  z-index:50;
+}
+.overlay.hidden {
+  display:none;
+}
+.overlay-backdrop {
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,0.8);
+  backdrop-filter:blur(8px);
+}
+.overlay-panel {
+  position:relative;
+  max-width:900px;
+  width:100%;
+  max-height:100%;
+  overflow:auto;
+  background:#020617;
+  border-radius:18px;
+  border:1px solid rgba(75,85,99,0.9);
+  padding:18px;
+  z-index:51;
+  color:#e5e7eb;
+}
+.overlay-close {
+  position:absolute;
+  top:10px;
+  right:10px;
+  border:none;
+  background:transparent;
+  color:#e5e7eb;
+  font-size:1.1rem;
+  cursor:pointer;
+}
+.overlay-header {
+  display:flex;
+  gap:14px;
+  align-items:center;
+  margin-bottom:14px;
+}
+.overlay-icon {
+  width:80px;
+  height:80px;
+  border-radius:22px;
+  object-fit:cover;
+}
+.install-btn {
+  background:linear-gradient(to right,#22c55e,#16a34a);
+  border:none;
+  border-radius:999px;
+  padding:10px 20px;
+  color:white;
+  font-size:0.95rem;
+  cursor:pointer;
+  margin-bottom:8px;
+}
+.detail-stats {
+  font-size:0.8rem;
+  color:#9ca3af;
+  margin-bottom:12px;
+}
+.rating-block {
+  border-top:1px solid rgba(31,41,55,0.9);
+  border-bottom:1px solid rgba(31,41,55,0.9);
+  padding:10px 0;
+  margin-bottom:14px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+}
+.rating-label {
+  font-size:0.85rem;
+}
+.stars-row {
+  display:flex;
+  gap:4px;
+}
+.star-btn {
+  border:none;
+  background:transparent;
+  font-size:1.1rem;
+  cursor:pointer;
+  color:#facc15;
+}
+.star-btn:disabled {
+  opacity:0.5;
+  cursor:default;
+}
+.like-btn {
+  border:none;
+  border-radius:999px;
+  padding:6px 12px;
+  font-size:0.8rem;
+  background:rgba(59,130,246,0.18);
+  color:#bfdbfe;
+  cursor:pointer;
+}
+.detail-desc {
+  font-size:0.88rem;
+  color:#e5e7eb;
+  margin-bottom:10px;
+}
+.screenshots-row {
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+}
+.screenshots-row img {
+  width:220px;
+  height:400px;
+  object-fit:cover;
+  border-radius:14px;
+}
+
