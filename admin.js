@@ -24,9 +24,9 @@ function toggleApps() {
   box.classList.toggle("hidden");
 
   if (box.classList.contains("hidden")) {
-    btn.textContent = "📦 Mostrar Apps Subidas";
+    btn.textContent = "📦 Apps Subidas";
   } else {
-    btn.textContent = "📦 Ocultar Apps Subidas";
+    btn.textContent = "📦 Ocultar Apps";
   }
 }
 
@@ -157,37 +157,28 @@ function guardarApp() {
   let promesaImg = imgFile ? upload(storage.ref(`imagenes/${id}.jpg`), imgFile) : Promise.resolve(null);
   let promesaApk = apkFile ? upload(storage.ref(`apks/${id}.apk`), apkFile) : Promise.resolve(null);
 
-  Promise.all([promesaImg, promesaApk])
-  .then(([imgURL, apkURL]) => {
+  Promise.all([promesaImg, promesaApk]).then(([imgURL, apkURL]) => {
 
-    return db.collection("apps").doc(id).get().then(docOld => {
+    const data = {
+      id,
+      nombre,
+      descripcion,
+      version,
+      categoria,
+      idioma,
+      tipo,
+      internet,
+      fecha: Date.now()
+    };
 
-      const old = docOld.data() || {};
+    if (imgURL) data.imagen = imgURL;
 
-      const data = {
-        id,
-        nombre,
-        descripcion,
-        version,
-        categoria,
-        idioma,
-        tipo,
-        internet,
-        fecha: Date.now()
-      };
+    if (apkURL) {
+      data.apk = apkURL;
+      data.size = (apkFile.size / 1024 / 1024).toFixed(1) + " MB";
+    }
 
-      if (imgURL) data.imagen = imgURL;
-
-      if (apkURL) {
-        data.apk = apkURL;
-        data.size = (apkFile.size / 1024 / 1024).toFixed(1) + " MB";
-      } else {
-        data.size = old.size || data.size;
-      }
-
-      return docRef.set(data, { merge: true });
-    });
-
+    return docRef.set(data, { merge: true });
   })
   .then(() => {
 
@@ -200,7 +191,7 @@ function guardarApp() {
       document.getElementById("subirBtn").textContent = "SUBIR APP";
     }
 
-    limpiarFormulario();
+    limpiarFormulario(); // limpiar todos los campos
 
   })
   .catch(err => {
@@ -208,7 +199,6 @@ function guardarApp() {
     btn.disabled = false;
   });
 }
-
 
 
 // =======================
