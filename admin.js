@@ -121,7 +121,7 @@ function guardarApp() {
   const tipo = document.getElementById("tipo").value.trim();
   const internet = document.getElementById("internet").value;
 
-  const sistema = document.getElementById("sistema").value.trim();
+  const sistema = document.getElementById("sistemaOperativo").value.trim();
   const requisitos = document.getElementById("requisitos").value.trim();
   const fechaAct = document.getElementById("fechaAct").value;
   const edad = document.getElementById("edad").value.trim();
@@ -277,3 +277,4 @@ function limpiarFormulario() {
   document.getElementById("imagen").value = "";
   document.getElementById("capturas").value = "";
 }
+
