@@ -535,10 +535,10 @@ body {
 .bar-fill {
   height: 100%;
   background: #22c55e;
-  width: 0%;
   border-radius: 40px;
   transition: width 0.4s ease;
 }
+
 
 /* INFORMACIÓN DE LA APP */
 .info-app {
@@ -649,3 +649,4 @@ body {
 .store-footer {
   margin-top: auto;
 }
+
