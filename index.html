@@ -1,134 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Panel Administrador</title>
-  <link rel="stylesheet" href="admin.css">
+  <meta charset="utf-8" />
+  <title>AppsMart Technology — Tienda de Apps</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-
-<div class="admin-container">
-
-  <header class="admin-header">
-    <div class="admin-header-left">
-      <h1><span class="icon">⚙️</span> AppsMart Admin</h1>
-      <p>Subir, editar y manejar aplicaciones</p>
+  <!-- HEADER -->
+  <header class="store-header">
+    <div class="brand">
+      <img src="logo appsmart.png" alt="AppsMart Technology" class="brand-logo">
+      <div>
+        <h1>AppsMart Technology</h1>
+        <p class="brand-tagline">Desarrollador Android • IA • Innovación</p>
+      </div>
     </div>
-    <button class="btn-logout" onclick="logout()">Cerrar sesión</button>
+
+    <div class="header-right">
+      <div class="search-box">
+        <span class="icon">🔍</span>
+        <input id="searchInput" type="text" placeholder="Buscar apps, juegos, herramientas..." />
+      </div>
+      <a class="admin-link" href="admin-login.html" target="_blank" rel="noreferrer">
+        Panel Admin
+      </a>
+    </div>
   </header>
 
+  <!-- CATEGORÍAS -->
+  <section class="categories-bar">
+    <button class="chip active" data-cat="all">Todas</button>
+    <button class="chip" data-cat="Educación">Educación</button>
+    <button class="chip" data-cat="Libros">Libros</button>
+    <button class="chip" data-cat="Juegos">Juegos</button>
+    <button class="chip" data-cat="Música y Audio">Música y Audio</button>
+    <button class="chip" data-cat="Productividad">Productividad</button>
+    <button class="chip" data-cat="Sociales">Sociales</button>
+    <button class="chip" data-cat="Fotografía y Video">Fotografía y Video</button>
+    <button class="chip" data-cat="Entretenimiento">Entretenimiento</button>
+    <button class="chip" data-cat="Herramientas">Herramientas</button>
+  </section>
 
-  <!-- ============ BOTÓN PARA VER/OCULTAR LAS APPS ============ -->
-  <button class="btn-toggle" onclick="toggleApps()">📦 Apps Subidas</button>
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="store-main">
+    <section class="apps-section">
+      <h2 class="section-title">Apps destacadas</h2>
+      <p class="section-subtitle">Explora las últimas aplicaciones publicadas por AppsMart Technology.</p>
 
-  <!-- ============ LISTADO OCULTO ============ -->
-  <div id="appsContainer" class="hidden">
-    <h3 class="panel-section-title">📦 Aplicaciones Publicadas</h3>
+      <div id="appsGrid" class="apps-grid"></div>
 
-    <table class="apps-table">
-      <thead>
-        <tr>
-          <th>Icono</th>
-          <th>Nombre</th>
-          <th>Categoría</th>
-          <th>Versión</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="appsList"></tbody>
-    </table>
-  </div>
+      <p id="emptyState" class="empty-state" style="display:none;">
+        No se encontraron apps para esta búsqueda o categoría.
+      </p>
+    </section>
+  </main>
 
+  <!-- FOOTER -->
+  <footer class="store-footer">
+    <div>© <span id="year"></span> AppsMart Technology — Desarrollador de aplicaciones Android.</div>
+    <div class="footer-right"><span>Hecho con ❤️ y Firebase</span></div>
+  </footer>
 
-  <!-- ============ FORMULARIO ============ -->
-  <h3 class="panel-section-title" id="formTitle">➕ Nueva Aplicación</h3>
+  <!-- ========== OVERLAY DETALLE ÚNICO (CORREGIDO) ========== -->
+  <div id="detailOverlay" class="overlay hidden">
+    <div id="detailBackdrop" class="overlay-backdrop"></div>
 
-  <div class="form-card">
+    <div class="overlay-panel">
 
-    <div class="form-main-fields">
-      <div class="form-group">
-        <label>Nombre</label>
-        <input id="nombre" type="text">
+      <button id="detailClose" class="overlay-close">✕</button>
+
+      <div class="overlay-header">
+        <img id="detailIcon" class="overlay-icon" src="" alt="App">
+        <div>
+          <h1 id="detailName"></h1>
+          <p id="detailCategory"></p>
+          <p id="detailSize"></p>
+          <p id="detailInternet"></p>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>Descripción</label>
-        <textarea id="descripcion"></textarea>
+      <button id="installBtn" class="install-btn">Instalar</button>
+
+      <p id="detailStats" class="detail-stats"></p>
+
+      <div class="rating-block">
+        <p id="ratingLabel" class="rating-label"></p>
+        <div id="starsRow" class="stars-row"></div>
+        <button id="likeBtn" class="like-btn">❤️ Me gusta</button>
       </div>
 
-      <div class="form-group">
-        <label>Versión</label>
-        <input id="version" type="text">
-      </div>
-    </div>
+      <h2>Descripción</h2>
+      <p id="detailDesc" class="detail-desc"></p>
 
-    <div class="form-side-fields">
-
-      <div class="form-group">
-        <label>Categoría</label>
-        <select id="categoria">
-          <option>Educación</option>
-          <option>Libros</option>
-          <option>Juegos</option>
-          <option>Sociales</option>
-          <option>Herramientas</option>
-          <option>Entretenimiento</option>
-          <option>Música y Audio</option>
-          <option>Fotografía y Video</option>
-          <option>Productividad</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Idioma</label>
-        <input id="idioma" type="text">
-      </div>
-
-      <div class="form-group">
-        <label>Tipo</label>
-        <select id="tipo">
-          <option>Gratis</option>
-          <option>Pagada</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Conexión</label>
-        <select id="internet">
-          <option value="offline">Funciona sin Internet</option>
-          <option value="online">Requiere Internet</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>APK (solo si deseas cambiarla)</label>
-        <input id="apk" type="file" accept=".apk">
-      </div>
-
-      <div class="form-group">
-        <label>Imagen (solo si deseas cambiarla)</label>
-        <input id="imagen" type="file" accept="image/*">
-      </div>
-
-      <button id="subirBtn" class="btn-primary" onclick="guardarApp()">SUBIR APP</button>
-
-      <p class="status-text" id="estado"></p>
+      <h2>Capturas de pantalla</h2>
+      <div id="detailScreens" class="screenshots-row"></div>
 
     </div>
-
   </div>
+  <!-- ======================================================= -->
 
-</div>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+  <!-- Configuración Firebase de tu proyecto -->
+  <script src="firebase.js"></script>
 
-<script src="firebase.js"></script>
-<script src="admin.js"></script>
+  <!-- Lógica de la tienda -->
+  <script src="index.js"></script>
 
 </body>
 </html>
