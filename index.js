@@ -295,11 +295,11 @@ function renderStars(app) {
 
   const avg = app.ratingAvg || 0;
 
-  const full = Math.floor(avg);               // Estrellas llenas
-  const half = avg % 1 >= 0.25 && avg % 1 < 0.75 ? 1 : 0; // Media estrella
-  const empty = 5 - full - half;              // Estrellas vacías
+  const full = Math.floor(avg);                                // llenas
+  const half = avg % 1 >= 0.25 && avg % 1 < 0.75 ? 1 : 0;      // media
+  const empty = 5 - full - half;                               // vacías
 
-  // Estrellas llenas
+  // ★ Estrellas llenas
   for (let i = 0; i < full; i++) {
     const s = document.createElement("span");
     s.className = "star-static";
@@ -307,15 +307,15 @@ function renderStars(app) {
     starsRow.appendChild(s);
   }
 
-  // Media estrella
+  // ⯨ Media estrella
   if (half === 1) {
     const s = document.createElement("span");
     s.className = "star-static";
-    s.textContent = "⯨"; // Símbolo de media estrella
+    s.textContent = "⯨";
     starsRow.appendChild(s);
   }
 
-  // Estrellas vacías
+  // ☆ Estrellas vacías
   for (let i = 0; i < empty; i++) {
     const s = document.createElement("span");
     s.className = "star-static";
@@ -323,6 +323,7 @@ function renderStars(app) {
     starsRow.appendChild(s);
   }
 }
+
 
 
 // ====== Reseñas ======
@@ -434,4 +435,5 @@ function handleSendReview() {
     alert("¡Tu reseña fue publicada!");
   });
 }
+
 
