@@ -13,6 +13,13 @@ function logout() { auth.signOut(); }
 // =======================
 let editId = null; // null = nueva app | id = editar app
 
+// =======================
+// MOSTRAR / OCULTAR LISTA
+// =======================
+function toggleApps() {
+  const box = document.getElementById("appsContainer");
+  box.classList.toggle("hidden");
+}
 
 // =======================
 // LISTADO DE APPS
@@ -179,3 +186,4 @@ function guardarApp() {
     btn.disabled = false;
   });
 }
+
