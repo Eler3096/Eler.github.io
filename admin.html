@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
   <meta charset="UTF-8">
@@ -64,6 +64,26 @@
         <input id="version" type="text">
       </div>
 
+      <div class="form-group">
+        <label>Sistema Operativo</label>
+        <input id="sistema" type="text" placeholder="Ej: Android">
+      </div>
+
+      <div class="form-group">
+        <label>Requisitos del sistema</label>
+        <input id="requisitos" type="text" placeholder="Ej: Android 5.0+">
+      </div>
+
+      <div class="form-group">
+        <label>Fecha de actualización</label>
+        <input id="fechaAct" type="date">
+      </div>
+
+      <div class="form-group">
+        <label>Edad recomendada</label>
+        <input id="edad" type="text" placeholder="Ej: +13, +16">
+      </div>
+
     </div>
 
     <div class="form-side-fields">
@@ -105,6 +125,24 @@
       </div>
 
       <div class="form-group">
+        <label>¿Contiene anuncios?</label>
+        <select id="anuncios">
+          <option value="si">Sí contiene</option>
+          <option value="no">No contiene</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Política de privacidad (URL)</label>
+        <input id="privacidad" type="text" placeholder="https://...">
+      </div>
+
+      <div class="form-group">
+        <label>Capturas secundarias (máx 6)</label>
+        <input id="capturas" type="file" accept="image/*" multiple>
+      </div>
+
+      <div class="form-group">
         <label>APK (solo si deseas cambiarla)</label>
         <input id="apk" type="file" accept=".apk">
       </div>
@@ -135,4 +173,3 @@
 
 </body>
 </html>
-
