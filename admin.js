@@ -5,13 +5,17 @@ auth.onAuthStateChanged(user => {
   if (!user) location.href = "admin-login.html";
 });
 
-function logout() { auth.signOut(); }
+function logout() {
+  auth.signOut();
+}
+
 
 
 // =======================
 // VARIABLES GLOBALES
 // =======================
 let editId = null; // null = nueva app | id = editar app
+
 
 
 // =======================
@@ -29,6 +33,7 @@ function toggleApps() {
     btn.textContent = "📦 Ocultar Apps";
   }
 }
+
 
 
 // =======================
@@ -59,6 +64,7 @@ db.collection("apps").orderBy("fecha", "desc").onSnapshot(snap => {
 });
 
 
+
 // =======================
 // CARGAR APP PARA EDITAR
 // =======================
@@ -79,9 +85,13 @@ function cargarParaEditar(id) {
     document.getElementById("tipo").value = a.tipo;
     document.getElementById("internet").value = a.internet;
 
+    // Guardar tamaño actual, por si no se sube un APK nuevo
+    document.getElementById("version").dataset.prevSize = a.size || "";
+
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
+
 
 
 // =======================
@@ -171,11 +181,17 @@ function guardarApp() {
       fecha: Date.now()
     };
 
+    // Guardar imagen solo si se subió
     if (imgURL) data.imagen = imgURL;
 
+    // Guardar APK solo si se subió
     if (apkURL) {
       data.apk = apkURL;
       data.size = (apkFile.size / 1024 / 1024).toFixed(1) + " MB";
+    } else if (editId !== null) {
+      // Mantener tamaño anterior al editar
+      const prevSize = document.getElementById("version").dataset.prevSize;
+      if (prevSize) data.size = prevSize;
     }
 
     return docRef.set(data, { merge: true });
@@ -185,20 +201,21 @@ function guardarApp() {
     estado.textContent = "Guardado ✔";
     btn.disabled = false;
 
+    // Volver a modo "Nueva App"
     if (editId !== null) {
       editId = null;
       document.getElementById("formTitle").textContent = "➕ Nueva Aplicación";
       document.getElementById("subirBtn").textContent = "SUBIR APP";
     }
 
-    limpiarFormulario(); // limpiar todos los campos
-
+    limpiarFormulario();
   })
   .catch(err => {
     estado.textContent = "Error: " + err.message;
     btn.disabled = false;
   });
 }
+
 
 
 // =======================
