@@ -72,12 +72,12 @@ function cargarParaEditar(id) {
     document.getElementById("tipo").value = a.tipo;
     document.getElementById("internet").value = a.internet;
 
-    document.getElementById("sistema").value = a.sistema || "";
+    document.getElementById("sistema").value = a.sistemaOperativo || "";
     document.getElementById("requisitos").value = a.requisitos || "";
-    document.getElementById("fechaAct").value = a.fechaAct || "";
+    document.getElementById("fechaAct").value = a.fechaActualizacion || "";
     document.getElementById("edad").value = a.edad || "";
     document.getElementById("anuncios").value = a.anuncios || "no";
-    document.getElementById("privacidad").value = a.privacidad || "";
+    document.getElementById("privacidad").value = a.privacidadUrl || "";
 
     prevSize = a.size || null;
 
@@ -209,25 +209,30 @@ function guardarApp() {
       idioma,
       tipo,
       internet,
-      sistema,
+
+      // 🔥 NOMBRES corregidos para index.js
+      sistemaOperativo: sistema,
       requisitos,
-      fechaAct,
+      fechaActualizacion: fechaAct,
       edad,
       anuncios,
-      privacidad,
+      privacidadUrl: privacidad,
+
       fecha: Date.now()
     };
 
-    if (capturasURLS.length > 0) data.capturas = capturasURLS;
+    if (capturasURLS.length > 0) data.imgSecundarias = capturasURLS;
     if (imgURL) data.imagen = imgURL;
     if (apkData.url) data.apk = apkData.url;
     if (apkData.size) data.size = apkData.size;
 
     // valores iniciales
-    data.ratingAvg = 0;
-    data.ratingCount = 0;
-    data.starsBreakdown = {1:0,2:0,3:0,4:0,5:0};
-    data.descargasReales = 0;
+    if (!editId) {
+      data.ratingAvg = 0;
+      data.ratingCount = 0;
+      data.starsBreakdown = {1:0,2:0,3:0,4:0,5:0};
+      data.descargasReales = 0;
+    }
 
     return docRef.set(data, { merge: true });
   })
