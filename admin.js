@@ -187,10 +187,13 @@ function guardarApp() {
     btn.disabled = false;
 
     if (editId !== null) {
-      editId = null;
-      document.getElementById("formTitle").textContent = "➕ Nueva Aplicación";
-      document.getElementById("subirBtn").textContent = "SUBIR APP";
-    }
+  editId = null;
+  document.getElementById("formTitle").textContent = "➕ Nueva Aplicación";
+  document.getElementById("subirBtn").textContent = "SUBIR APP";
+}
+
+limpiarFormulario(); // 👉 limpia todo después de guardar
+
 
     // limpiar archivos seleccionados
     document.getElementById("apk").value = "";
@@ -214,3 +217,4 @@ function limpiarFormulario() {
   document.getElementById("apk").value = "";
   document.getElementById("imagen").value = "";
 }
+
