@@ -202,3 +202,15 @@ function guardarApp() {
     btn.disabled = false;
   });
 }
+
+function limpiarFormulario() {
+  document.getElementById("nombre").value = "";
+  document.getElementById("descripcion").value = "";
+  document.getElementById("version").value = "";
+  document.getElementById("categoria").value = "Educación";
+  document.getElementById("idioma").value = "";
+  document.getElementById("tipo").value = "Gratis";
+  document.getElementById("internet").value = "offline";
+  document.getElementById("apk").value = "";
+  document.getElementById("imagen").value = "";
+}
