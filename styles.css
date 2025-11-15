@@ -32,8 +32,8 @@ body {
 }
 
 .brand-logo {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   object-fit: contain;
   border-radius: 10px;
   background: #0b1120;
@@ -137,7 +137,7 @@ body {
 }
 
 .section-title {
-  font-size: 1.2rem;
+  font-size: 2.5rem;
   font-weight: 600;
   margin-bottom: 4px;
 }
@@ -492,5 +492,6 @@ body {
 .store-footer {
   margin-top: auto;
 }
+
 
 
