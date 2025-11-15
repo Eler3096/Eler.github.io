@@ -19,10 +19,12 @@
   </header>
 
 
-  <!-- ============ BOTÓN PARA VER/OCULTAR LAS APPS ============ -->
-  <button class="btn-toggle" onclick="toggleApps()">📦 Apps Subidas</button>
+  <!-- ============ BOTÓN PARA MOSTRAR / OCULTAR ============ -->
+  <button id="toggleBtn" class="btn-toggle" onclick="toggleApps()">
+    📦 Mostrar Apps Subidas
+  </button>
 
-  <!-- ============ LISTADO OCULTO ============ -->
+  <!-- ============ LISTADO OCULTO AL INICIO ============ -->
   <div id="appsContainer" class="hidden">
     <h3 class="panel-section-title">📦 Aplicaciones Publicadas</h3>
 
@@ -47,6 +49,7 @@
   <div class="form-card">
 
     <div class="form-main-fields">
+
       <div class="form-group">
         <label>Nombre</label>
         <input id="nombre" type="text">
@@ -61,6 +64,7 @@
         <label>Versión</label>
         <input id="version" type="text">
       </div>
+
     </div>
 
     <div class="form-side-fields">
