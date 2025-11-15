@@ -64,7 +64,7 @@
     <div class="footer-right"><span>Hecho con ❤️ y Firebase</span></div>
   </footer>
 
-  <!-- ========== OVERLAY DETALLE ÚNICO (CORREGIDO) ========== -->
+  <!-- ========== OVERLAY DETALLE ========== -->
   <div id="detailOverlay" class="overlay hidden">
     <div id="detailBackdrop" class="overlay-backdrop"></div>
 
@@ -90,6 +90,23 @@
         <p id="ratingLabel" class="rating-label"></p>
         <div id="starsRow" class="stars-row"></div>
         <button id="likeBtn" class="like-btn">❤️ Me gusta</button>
+      </div>
+
+      <!-- 🔥 Resumen de valoraciones tipo Google Play -->
+      <h2>Valoraciones y reseñas</h2>
+      <div class="rating-summary">
+        <div class="rating-left">
+          <h1 id="ratingBig" class="rating-big">0.0</h1>
+          <p id="ratingTotal" class="rating-total">0 reseñas</p>
+        </div>
+
+        <div class="rating-bars">
+          <div class="bar-row"><span>5</span><div class="bar"><div id="bar5"></div></div></div>
+          <div class="bar-row"><span>4</span><div class="bar"><div id="bar4"></div></div></div>
+          <div class="bar-row"><span>3</span><div class="bar"><div id="bar3"></div></div></div>
+          <div class="bar-row"><span>2</span><div class="bar"><div id="bar2"></div></div></div>
+          <div class="bar-row"><span>1</span><div class="bar"><div id="bar1"></div></div></div>
+        </div>
       </div>
 
       <h2>Descripción</h2>
