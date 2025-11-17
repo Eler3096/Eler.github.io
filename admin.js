@@ -79,14 +79,11 @@ function cargarParaEditar(id) {
     document.getElementById("anuncios").value = a.anuncios || "no";
     document.getElementById("privacidad").value = a.privacidadUrl || "";
 
-    // Campos URL
+    // Asignación de las URLs de las capturas (hasta 6)
     document.getElementById("imagenUrl").value = a.imagen || "";
-    document.getElementById("capturaUrl1").value = a.imgSecundarias ? a.imgSecundarias[0] : "";
-    document.getElementById("capturaUrl2").value = a.imgSecundarias ? a.imgSecundarias[1] : "";
-    document.getElementById("capturaUrl3").value = a.imgSecundarias ? a.imgSecundarias[2] : "";
-    document.getElementById("capturaUrl4").value = a.imgSecundarias ? a.imgSecundarias[3] : "";
-    document.getElementById("capturaUrl5").value = a.imgSecundarias ? a.imgSecundarias[4] : "";
-    document.getElementById("capturaUrl6").value = a.imgSecundarias ? a.imgSecundarias[5] : "";
+    for (let i = 0; i < 6; i++) {
+      document.getElementById(`capturaUrl${i + 1}`).value = a.imgSecundarias ? a.imgSecundarias[i] || "" : "";
+    }
     document.getElementById("iconoUrl").value = a.icono || "";  // Campo para el icono
     document.getElementById("apkUrl").value = a.apk || "";  // Campo para el APK
 
@@ -113,7 +110,6 @@ function eliminarApp(id) {
 // GUARDAR / EDITAR APP
 // =======================
 function guardarApp() {
-
   const nombre = document.getElementById("nombre").value.trim();
   const descripcion = document.getElementById("descripcion").value.trim();
   const version = document.getElementById("version").value.trim();
