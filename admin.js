@@ -107,8 +107,7 @@ function eliminarApp(id) {
 // =======================
 // GUARDAR / EDITAR APP
 // =======================
-function guardarApp() {
-
+async function guardarApp() {
   const nombre = document.getElementById("nombre").value.trim();
   const descripcion = document.getElementById("descripcion").value.trim();
   const version = document.getElementById("version").value.trim();
@@ -125,10 +124,37 @@ function guardarApp() {
   const privacidad = document.getElementById("privacidad").value.trim();
 
   // NUEVOS CAMPOS
-  const imagenUrl = document.getElementById("imagenUrl").value.trim();
-  const capturasUrl = document.getElementById("capturasUrl").value.trim();
-  const iconoUrl = document.getElementById("iconoUrl").value.trim(); // Enlace del icono
-  const apkUrl = document.getElementById("apkUrl").value.trim();  // Enlace del APK
+  const imagenFile = document.getElementById("imagen").files[0];
+  const apkFile = document.getElementById("apk").files[0];
+  const capturasFiles = document.getElementById("capturas").files;
+
+  // Subir los archivos a Firebase Storage
+  const storageRef = firebase.storage().ref();
+  let imagenUrl = "";
+  let apkUrl = "";
+  let capturasUrls = [];
+
+  // Subir Imagen principal
+  if (imagenFile) {
+    const imagenRef = storageRef.child('images/' + imagenFile.name);
+    await imagenRef.put(imagenFile);
+    imagenUrl = await imagenRef.getDownloadURL();
+  }
+
+  // Subir APK
+  if (apkFile) {
+    const apkRef = storageRef.child('apk/' + apkFile.name);
+    await apkRef.put(apkFile);
+    apkUrl = await apkRef.getDownloadURL();
+  }
+
+  // Subir Capturas
+  for (const file of capturasFiles) {
+    const capturaRef = storageRef.child('capturas/' + file.name);
+    await capturaRef.put(file);
+    const capturaUrl = await capturaRef.getDownloadURL();
+    capturasUrls.push(capturaUrl);
+  }
 
   const estado = document.getElementById("estado");
   const btn = document.getElementById("subirBtn");
@@ -168,8 +194,8 @@ function guardarApp() {
     privacidadUrl: privacidad,
     fecha: Date.now(),
     imagen: imagenUrl,
-    imgSecundarias: capturasUrl.split(",").map(u => u.trim()),
-    icono: iconoUrl,
+    imgSecundarias: capturasUrls,
+    icono: "",  // Añadir icono si es necesario
     apk: apkUrl,
     size: prevSize || "N/A"
   };
