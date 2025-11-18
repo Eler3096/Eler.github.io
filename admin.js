@@ -107,6 +107,8 @@ function eliminarApp(id) {
 // =======================
 // GUARDAR / EDITAR APP
 // =======================
+// GUARDAR / EDITAR APP
+// =======================
 async function guardarApp() {
   const nombre = document.getElementById("nombre").value.trim();
   const descripcion = document.getElementById("descripcion").value.trim();
@@ -128,32 +130,37 @@ async function guardarApp() {
   const apkFile = document.getElementById("apk").files[0];
   const capturasFiles = document.getElementById("capturas").files;
 
+  // Inicializamos las variables para las URLs
+  let imagenUrl = document.getElementById("imagenUrl").value.trim();  // URL existente
+  let apkUrl = document.getElementById("apkUrl").value.trim();  // URL existente
+  let capturasUrls = capturasFiles.length > 0 ? [] : document.getElementById("capturasUrl").value.split(",").map(u => u.trim()); // URLs existentes
+
   // Subir los archivos a Firebase Storage
   const storageRef = firebase.storage().ref();
-  let imagenUrl = "";
-  let apkUrl = "";
-  let capturasUrls = [];
 
-  // Subir Imagen principal
+  // Subir Imagen principal si se ha seleccionado un nuevo archivo
   if (imagenFile) {
     const imagenRef = storageRef.child('images/' + imagenFile.name);
     await imagenRef.put(imagenFile);
-    imagenUrl = await imagenRef.getDownloadURL();
+    imagenUrl = await imagenRef.getDownloadURL();  // Actualizamos la URL
   }
 
-  // Subir APK
+  // Subir APK si se ha seleccionado un nuevo archivo
   if (apkFile) {
     const apkRef = storageRef.child('apk/' + apkFile.name);
     await apkRef.put(apkFile);
-    apkUrl = await apkRef.getDownloadURL();
+    apkUrl = await apkRef.getDownloadURL();  // Actualizamos la URL
   }
 
-  // Subir Capturas
-  for (const file of capturasFiles) {
-    const capturaRef = storageRef.child('capturas/' + file.name);
-    await capturaRef.put(file);
-    const capturaUrl = await capturaRef.getDownloadURL();
-    capturasUrls.push(capturaUrl);
+  // Subir Capturas si se han seleccionado nuevas imágenes
+  if (capturasFiles.length > 0) {
+    capturasUrls = [];
+    for (const file of capturasFiles) {
+      const capturaRef = storageRef.child('capturas/' + file.name);
+      await capturaRef.put(file);
+      const capturaUrl = await capturaRef.getDownloadURL();
+      capturasUrls.push(capturaUrl);
+    }
   }
 
   const estado = document.getElementById("estado");
@@ -195,7 +202,7 @@ async function guardarApp() {
     fecha: Date.now(),
     imagen: imagenUrl,
     imgSecundarias: capturasUrls,
-    icono: "",  // Añadir icono si es necesario
+    icono: "",  // Puedes añadir un campo para icono si es necesario
     apk: apkUrl,
     size: prevSize || "N/A"
   };
@@ -248,3 +255,4 @@ function limpiarFormulario() {
   document.getElementById("imagen").value = "";
   document.getElementById("capturas").value = "";
 }
+
