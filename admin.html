@@ -269,78 +269,86 @@
 <script src="admin.js"></script>
 
 <script>
-// Función para abrir el repositorio de GitHub y mostrar las carpetas
-function openGitHubRepo(fieldId) {
-    const repoUrl = 'https://raw.githubusercontent.com/Eler3096/eler3096.github.io/main/release/';
-    
+  // Función para abrir el repositorio de GitHub y mostrar las carpetas reales
+  function openGitHubRepo(fieldId) {
+    const repoUrl = 'https://api.github.com/repos/Eler3096/eler3096.github.io/contents/release/';
+
     // Abre el modal
     document.getElementById('modal').style.display = 'block';
 
-    // Lista de carpetas (simulada aquí para el ejemplo)
-    const folders = [
-        'App1',
-        'App2',
-        'App3',
-        'App4'
-    ];
+    // Realiza una solicitud a la API de GitHub para obtener el contenido del repositorio
+    fetch(repoUrl)
+      .then(response => response.json())
+      .then(data => {
+        const modalContent = document.getElementById('modalContent');
+        modalContent.innerHTML = '';  // Limpiar el contenido anterior
 
-    const modalContent = document.getElementById('modalContent');
-    modalContent.innerHTML = '';  // Limpiar el contenido anterior
+        // Filtrar solo las carpetas
+        const folders = data.filter(item => item.type === 'dir');
 
-    // Mostrar las carpetas en el modal
-    folders.forEach((folder) => {
-        const folderBtn = document.createElement('button');
-        folderBtn.className = 'folder-btn';
-        folderBtn.textContent = folder;
+        // Mostrar las carpetas en el modal
+        folders.forEach((folder) => {
+          const folderBtn = document.createElement('button');
+          folderBtn.className = 'folder-btn';
+          folderBtn.textContent = folder.name;
 
-        // Al hacer clic en una carpeta, mostrar las imágenes de esa carpeta
-        folderBtn.onclick = function() {
-            showImages(folder, fieldId);
-        };
+          // Al hacer clic en una carpeta, mostrar las imágenes de esa carpeta
+          folderBtn.onclick = function() {
+            showImages(folder.name, fieldId);
+          };
 
-        modalContent.appendChild(folderBtn);
-    });
-}
+          modalContent.appendChild(folderBtn);
+        });
+      })
+      .catch(error => {
+        console.error('Error al obtener el contenido del repositorio:', error);
+        alert('Hubo un problema al cargar las carpetas.');
+      });
+  }
 
-// Función para mostrar las imágenes de la carpeta seleccionada
-function showImages(folder, fieldId) {
-    const repoUrl = 'https://raw.githubusercontent.com/Eler3096/eler3096.github.io/main/release/' + folder + '/';
+  // Función para mostrar las imágenes de la carpeta seleccionada
+  function showImages(folder, fieldId) {
+    const repoUrl = 'https://api.github.com/repos/Eler3096/eler3096.github.io/contents/release/' + folder;
 
-    // Lista de imágenes (simulada aquí para el ejemplo)
-    const images = [
-        'imagen1.png',
-        'imagen2.png',
-        'imagen3.png',
-        'imagen4.png'
-    ];
+    // Realiza una solicitud a la API de GitHub para obtener el contenido de la carpeta
+    fetch(repoUrl)
+      .then(response => response.json())
+      .then(data => {
+        const modalContent = document.getElementById('modalContent');
+        modalContent.innerHTML = '';  // Limpiar el contenido anterior
 
-    const modalContent = document.getElementById('modalContent');
-    modalContent.innerHTML = '';  // Limpiar el contenido anterior
+        // Filtrar solo las imágenes
+        const images = data.filter(item => item.type === 'file' && item.name.match(/\.(jpg|jpeg|png|gif)$/i));
 
-    // Mostrar las imágenes de la carpeta
-    images.forEach((image) => {
-        const imgElement = document.createElement('img');
-        imgElement.src = repoUrl + image;
-        imgElement.alt = image;
-        imgElement.style.cursor = 'pointer';
-        imgElement.style.margin = '10px';
-        imgElement.style.height = '100px'; // Ajustar tamaño
+        // Mostrar las imágenes de la carpeta
+        images.forEach((image) => {
+          const imgElement = document.createElement('img');
+          imgElement.src = image.download_url;
+          imgElement.alt = image.name;
+          imgElement.style.cursor = 'pointer';
+          imgElement.style.margin = '10px';
+          imgElement.style.height = '100px'; // Ajustar tamaño
 
-        // Al hacer clic, asignar la URL de la imagen al campo correspondiente
-        imgElement.onclick = function() {
+          // Al hacer clic, asignar la URL de la imagen al campo correspondiente
+          imgElement.onclick = function() {
             // Insertar la URL de la imagen seleccionada en el campo adecuado
             document.getElementById(fieldId).value = imgElement.src;
             closeModal();
-        };
+          };
 
-        modalContent.appendChild(imgElement);
-    });
-}
+          modalContent.appendChild(imgElement);
+        });
+      })
+      .catch(error => {
+        console.error('Error al obtener las imágenes de la carpeta:', error);
+        alert('Hubo un problema al cargar las imágenes.');
+      });
+  }
 
-function closeModal() {
+  function closeModal() {
     // Cerrar el modal
     document.getElementById('modal').style.display = 'none';
-}
+  }
 </script>
 
 </body>
