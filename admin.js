@@ -107,8 +107,6 @@ function eliminarApp(id) {
 // =======================
 // GUARDAR / EDITAR APP
 // =======================
-// GUARDAR / EDITAR APP
-// =======================
 async function guardarApp() {
   const nombre = document.getElementById("nombre").value.trim();
   const descripcion = document.getElementById("descripcion").value.trim();
@@ -135,7 +133,7 @@ async function guardarApp() {
   let apkUrl = document.getElementById("apkUrl").value.trim();  // URL existente
   let capturasUrls = capturasFiles.length > 0 ? [] : document.getElementById("capturasUrl").value.split(",").map(u => u.trim()); // URLs existentes
 
-  // Subir los archivos a Firebase Storage
+  // Subir los archivos a Firebase Storage solo si son nuevos
   const storageRef = firebase.storage().ref();
 
   // Subir Imagen principal si se ha seleccionado un nuevo archivo
@@ -200,10 +198,10 @@ async function guardarApp() {
     anuncios,
     privacidadUrl: privacidad,
     fecha: Date.now(),
-    imagen: imagenUrl,
-    imgSecundarias: capturasUrls,
+    imagen: imagenUrl,  // Usar la URL existente o nueva
+    imgSecundarias: capturasUrls,  // Usar URLs de capturas existentes o nuevas
     icono: "",  // Puedes añadir un campo para icono si es necesario
-    apk: apkUrl,
+    apk: apkUrl,  // Usar la URL existente o nueva
     size: prevSize || "N/A"
   };
 
@@ -255,4 +253,3 @@ function limpiarFormulario() {
   document.getElementById("imagen").value = "";
   document.getElementById("capturas").value = "";
 }
-
