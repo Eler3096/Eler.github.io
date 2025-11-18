@@ -647,6 +647,7 @@ h2 {
 
 html, body {
   height: 100%;
+  margin-top: 20px;
 }
 
 body {
@@ -708,6 +709,7 @@ body {
   color: #e5e7eb;
   margin-top: 2px;
 }
+
 
 
 
