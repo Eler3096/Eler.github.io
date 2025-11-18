@@ -179,7 +179,7 @@ textarea {
   border: 1px solid rgba(55,65,81,0.8);
   border-radius: 8px;
   color: #e5e7eb;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 }
 
 .form-group label {
@@ -226,4 +226,5 @@ textarea {
 .btn-toggle:hover {
   background: rgba(59,130,246,0.5);
 }
+
 
