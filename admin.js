@@ -86,6 +86,7 @@ function cargarParaEditar(id) {
     document.getElementById("apkUrl").value = a.apk || "";  // Campo para el APK
 
     prevSize = a.size || null;
+    document.getElementById("size").value = a.size || "";  // Cargar tamaño si existe
 
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
@@ -127,6 +128,9 @@ async function guardarApp() {
   const imagenFile = document.getElementById("imagen").files[0];
   const apkFile = document.getElementById("apk").files[0];
   const capturasFiles = document.getElementById("capturas").files;
+  
+  // Obtener el tamaño de la app ingresado manualmente
+  const size = document.getElementById("size").value.trim();
 
   // Inicializamos las variables para las URLs
   let imagenUrl = document.getElementById("imagenUrl").value.trim();  // URL existente
@@ -202,7 +206,7 @@ async function guardarApp() {
     imgSecundarias: capturasUrls,  // Usar URLs de capturas existentes o nuevas
     icono: "",  // Puedes añadir un campo para icono si es necesario
     apk: apkUrl,  // Usar la URL existente o nueva
-    size: prevSize || "N/A"
+    size: size || "N/A"  // Guardar el tamaño de la app
   };
 
   docRef.set(data, { merge: true })
@@ -247,6 +251,7 @@ function limpiarFormulario() {
   document.getElementById("capturasUrl").value = "";
   document.getElementById("iconoUrl").value = "";  // Limpiar campo del icono
   document.getElementById("apkUrl").value = "";  // Limpiar campo del APK
+  document.getElementById("size").value = "";  // Limpiar campo de tamaño
 
   // Desactivar los campos de carga de archivos
   document.getElementById("apk").value = "";
