@@ -173,8 +173,9 @@ async function guardarApp() {
     return;
   }
 
+  // Deshabilitar el botón para evitar clics múltiples durante el guardado
   btn.disabled = true;
-  estado.textContent = "Procesando…";
+  estado.textContent = "Guardando…";
 
   let docRef, id;
 
@@ -212,7 +213,7 @@ async function guardarApp() {
   docRef.set(data, { merge: true })
   .then(() => {
     estado.textContent = "Guardado ✔";
-    btn.disabled = false;
+    btn.disabled = false;  // Volver a habilitar el botón
 
     editId = null;
     prevSize = null;
@@ -224,9 +225,10 @@ async function guardarApp() {
   })
   .catch(err => {
     estado.textContent = "Error: " + err.message;
-    btn.disabled = false;
+    btn.disabled = false;  // Asegurarse de habilitar el botón en caso de error
   });
 }
+
 
 // =======================
 // LIMPIAR FORMULARIO
@@ -258,3 +260,4 @@ function limpiarFormulario() {
   document.getElementById("imagen").value = "";
   document.getElementById("capturas").value = "";
 }
+
