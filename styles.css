@@ -571,21 +571,20 @@ body {
 
 
 /* Reseñas */
+/* Reseñas */
 .review-form {
   background: rgba(255,255,255,0.04);
   padding: 12px;
   border-radius: 14px;
   margin-bottom: 16px;
-  margin-top: 30px;
+  margin-top: 30px;  /* Asegura que haya espacio desde el título anterior */
   border: 1px solid rgba(75,85,99,0.5);
 }
 
 .review-form h3 {
- margin-bottom: 12px;
   font-size: 0.95rem;
-  margin-top: 20px;
-  
-  
+  margin-bottom: 12px; /* Espacio entre el título y el formulario */
+  margin-top: 20px; /* Asegura que el título tenga espacio arriba */
 }
 
 .review-form label {
@@ -611,8 +610,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 14px;
-   margin-top: 30px;
-  
+  margin-top: 30px; /* Espacio adicional entre las reseñas y el contenido anterior */
 }
 
 .review-item {
@@ -620,8 +618,9 @@ body {
   padding: 12px;
   border-radius: 12px;
   border: 1px solid rgba(75,85,99,0.4);
-   margin-top: 14px;
+  margin-top: 14px; /* Espacio entre las reseñas */
 }
+
 
 .review-stars {
   color: #facc15;
@@ -703,6 +702,7 @@ body {
   color: #e5e7eb;
   margin-top: 2px;
 }
+
 
 
 
