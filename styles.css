@@ -580,8 +580,9 @@ body {
 }
 
 .review-form h3 {
-  margin-bottom: 6px;
+ margin-bottom: 12px;
   font-size: 0.95rem;
+  
 }
 
 .review-form label {
@@ -616,6 +617,7 @@ body {
   padding: 12px;
   border-radius: 12px;
   border: 1px solid rgba(75,85,99,0.4);
+   margin-top: 10px;
 }
 
 .review-stars {
@@ -698,6 +700,7 @@ body {
   color: #e5e7eb;
   margin-top: 2px;
 }
+
 
 
 
