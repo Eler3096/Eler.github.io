@@ -109,9 +109,11 @@ function eliminarApp(id) {
 // GUARDAR / EDITAR APP
 // =======================
 // =======================
+// =======================
 // GUARDAR / EDITAR APP
 // =======================
 async function guardarApp() {
+  // Obtener los valores de los campos
   const nombre = document.getElementById("nombre").value.trim();
   const descripcion = document.getElementById("descripcion").value.trim();
   const version = document.getElementById("version").value.trim();
@@ -140,41 +142,52 @@ async function guardarApp() {
   let apkUrl = document.getElementById("apkUrl").value.trim();  // URL existente
   let capturasUrls = capturasFiles.length > 0 ? [] : document.getElementById("capturasUrl").value.split(",").map(u => u.trim()); // URLs existentes
 
-  // Subir los archivos a Firebase Storage solo si son nuevos
-  const storageRef = firebase.storage().ref();
-
-  // Deshabilitar el botón para evitar clics múltiples
+  // Deshabilitar el botón de guardar inmediatamente
   const btn = document.getElementById("subirBtn");
   btn.disabled = true;
 
-  // Mostrar estado de "Guardando..."
+  // Mostrar el estado de "Guardando..."
   const estado = document.getElementById("estado");
   estado.textContent = "Guardando...";
 
+  // Subir los archivos a Firebase Storage solo si son nuevos
+  const storageRef = firebase.storage().ref();
+
+  // Variables para almacenar las promesas de las subidas
+  let imagenPromise = Promise.resolve();
+  let apkPromise = Promise.resolve();
+  let capturasPromise = Promise.resolve();
+
   // Subir Imagen principal si se ha seleccionado un nuevo archivo
   if (imagenFile) {
-    const imagenRef = storageRef.child('images/' + imagenFile.name);
-    await imagenRef.put(imagenFile);
-    imagenUrl = await imagenRef.getDownloadURL();  // Actualizamos la URL
+    imagenPromise = storageRef.child('images/' + imagenFile.name).put(imagenFile)
+      .then(() => storageRef.child('images/' + imagenFile.name).getDownloadURL())
+      .then(url => {
+        imagenUrl = url;  // Actualizamos la URL
+      });
   }
 
   // Subir APK si se ha seleccionado un nuevo archivo
   if (apkFile) {
-    const apkRef = storageRef.child('apk/' + apkFile.name);
-    await apkRef.put(apkFile);
-    apkUrl = await apkRef.getDownloadURL();  // Actualizamos la URL
+    apkPromise = storageRef.child('apk/' + apkFile.name).put(apkFile)
+      .then(() => storageRef.child('apk/' + apkFile.name).getDownloadURL())
+      .then(url => {
+        apkUrl = url;  // Actualizamos la URL
+      });
   }
 
   // Subir Capturas si se han seleccionado nuevas imágenes
   if (capturasFiles.length > 0) {
-    capturasUrls = [];
-    for (const file of capturasFiles) {
+    capturasPromise = Promise.all(Array.from(capturasFiles).map(file => {
       const capturaRef = storageRef.child('capturas/' + file.name);
-      await capturaRef.put(file);
-      const capturaUrl = await capturaRef.getDownloadURL();
-      capturasUrls.push(capturaUrl);
-    }
+      return capturaRef.put(file)
+        .then(() => capturaRef.getDownloadURL())
+        .then(url => capturasUrls.push(url));
+    }));
   }
+
+  // Esperar a que todas las subidas se completen
+  await Promise.all([imagenPromise, apkPromise, capturasPromise]);
 
   // Verificar campos requeridos antes de guardar
   if (!nombre || !descripcion || !version) {
@@ -263,5 +276,6 @@ function limpiarFormulario() {
   document.getElementById("imagen").value = "";
   document.getElementById("capturas").value = "";
 }
+
 
 
