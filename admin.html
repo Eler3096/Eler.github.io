@@ -166,6 +166,21 @@
       <!--   ELIMINACIÓN DE SUBIR ARCHIVOS -->
       <!-- ======================= -->
 
+      <div class="form-group">
+        <label>Capturas secundarias (máx 6)</label>
+        <input id="capturas" type="file" accept="image/*" multiple>
+      </div>
+
+      <div class="form-group">
+        <label>APK (solo si deseas cambiarla)</label>
+        <input id="apk" type="file" accept=".apk">
+      </div>
+
+      <div class="form-group">
+        <label>Imagen (solo si deseas cambiarla)</label>
+        <input id="imagen" type="file" accept="image/*">
+      </div>
+
       <button id="subirBtn" class="btn-primary" onclick="guardarApp()">SUBIR APP</button>
 
       <p class="status-text" id="estado"></p>
