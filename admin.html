@@ -21,13 +21,27 @@
         padding: 20px;
         border-radius: 10px;
         display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
+        flex-direction: column;
+        align-items: flex-start;
     }
     #modal img {
         cursor: pointer;
         margin: 10px;
         height: 100px;
+        border-radius: 5px;
+    }
+    .folder-btn {
+        margin: 10px;
+        padding: 10px;
+        cursor: pointer;
+        background-color: #ccc;
+        border-radius: 5px;
+    }
+    .image-btn {
+        margin: 10px;
+        padding: 5px;
+        cursor: pointer;
+        background-color: #eee;
         border-radius: 5px;
     }
   </style>
@@ -255,27 +269,55 @@
 <script src="admin.js"></script>
 
 <script>
-// Función para abrir el repositorio de GitHub y mostrar las imágenes
+// Función para abrir el repositorio de GitHub y mostrar las carpetas
 function openGitHubRepo(fieldId) {
     const repoUrl = 'https://raw.githubusercontent.com/Eler3096/eler3096.github.io/main/release/';
     
     // Abre el modal
     document.getElementById('modal').style.display = 'block';
 
-    // Lista de imágenes disponibles en el repositorio
-    const images = [
-        'imagen1.png',
-        'imagen2.png',
-        'imagen3.png',
-        'imagen4.png',
-        'imagen5.png',
-        'imagen6.png'
+    // Lista de carpetas (simulada aquí para el ejemplo)
+    const folders = [
+        'App1',
+        'App2',
+        'App3',
+        'App4'
     ];
 
     const modalContent = document.getElementById('modalContent');
     modalContent.innerHTML = '';  // Limpiar el contenido anterior
 
-    // Mostrar las imágenes en el modal
+    // Mostrar las carpetas en el modal
+    folders.forEach((folder) => {
+        const folderBtn = document.createElement('button');
+        folderBtn.className = 'folder-btn';
+        folderBtn.textContent = folder;
+
+        // Al hacer clic en una carpeta, mostrar las imágenes de esa carpeta
+        folderBtn.onclick = function() {
+            showImages(folder, fieldId);
+        };
+
+        modalContent.appendChild(folderBtn);
+    });
+}
+
+// Función para mostrar las imágenes de la carpeta seleccionada
+function showImages(folder, fieldId) {
+    const repoUrl = 'https://raw.githubusercontent.com/Eler3096/eler3096.github.io/main/release/' + folder + '/';
+
+    // Lista de imágenes (simulada aquí para el ejemplo)
+    const images = [
+        'imagen1.png',
+        'imagen2.png',
+        'imagen3.png',
+        'imagen4.png'
+    ];
+
+    const modalContent = document.getElementById('modalContent');
+    modalContent.innerHTML = '';  // Limpiar el contenido anterior
+
+    // Mostrar las imágenes de la carpeta
     images.forEach((image) => {
         const imgElement = document.createElement('img');
         imgElement.src = repoUrl + image;
