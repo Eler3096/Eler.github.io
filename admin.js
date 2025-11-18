@@ -108,6 +108,9 @@ function eliminarApp(id) {
 // =======================
 // GUARDAR / EDITAR APP
 // =======================
+// =======================
+// GUARDAR / EDITAR APP
+// =======================
 async function guardarApp() {
   const nombre = document.getElementById("nombre").value.trim();
   const descripcion = document.getElementById("descripcion").value.trim();
@@ -140,6 +143,14 @@ async function guardarApp() {
   // Subir los archivos a Firebase Storage solo si son nuevos
   const storageRef = firebase.storage().ref();
 
+  // Deshabilitar el botón para evitar clics múltiples
+  const btn = document.getElementById("subirBtn");
+  btn.disabled = true;
+
+  // Mostrar estado de "Guardando..."
+  const estado = document.getElementById("estado");
+  estado.textContent = "Guardando...";
+
   // Subir Imagen principal si se ha seleccionado un nuevo archivo
   if (imagenFile) {
     const imagenRef = storageRef.child('images/' + imagenFile.name);
@@ -165,17 +176,13 @@ async function guardarApp() {
     }
   }
 
-  const estado = document.getElementById("estado");
-  const btn = document.getElementById("subirBtn");
-
+  // Verificar campos requeridos antes de guardar
   if (!nombre || !descripcion || !version) {
     alert("Completa los campos requeridos");
+    btn.disabled = false;  // Habilitar el botón en caso de error
+    estado.textContent = "";
     return;
   }
-
-  // Deshabilitar el botón para evitar clics múltiples durante el guardado
-  btn.disabled = true;
-  estado.textContent = "Guardando…";
 
   let docRef, id;
 
@@ -210,25 +217,21 @@ async function guardarApp() {
     size: size || "N/A"  // Guardar el tamaño de la app
   };
 
-  docRef.set(data, { merge: true })
-  .then(() => {
+  try {
+    await docRef.set(data, { merge: true });
     estado.textContent = "Guardado ✔";
-    btn.disabled = false;  // Volver a habilitar el botón
-
+    btn.disabled = false;  // Habilitar el botón después de guardar correctamente
     editId = null;
     prevSize = null;
 
     document.getElementById("formTitle").textContent = "➕ Nueva Aplicación";
     document.getElementById("subirBtn").textContent = "SUBIR APP";
-
     limpiarFormulario();
-  })
-  .catch(err => {
+  } catch (err) {
     estado.textContent = "Error: " + err.message;
-    btn.disabled = false;  // Asegurarse de habilitar el botón en caso de error
-  });
+    btn.disabled = false;  // Habilitar el botón en caso de error
+  }
 }
-
 
 // =======================
 // LIMPIAR FORMULARIO
@@ -260,4 +263,5 @@ function limpiarFormulario() {
   document.getElementById("imagen").value = "";
   document.getElementById("capturas").value = "";
 }
+
 
