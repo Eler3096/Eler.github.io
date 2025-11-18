@@ -580,6 +580,13 @@ body {
   margin-top: 30px;  /* Asegura que haya espacio desde el título anterior */
   border: 1px solid rgba(75,85,99,0.5);
 }
+h2 {
+  margin-top: 10px !important;  /* Espacio superior desde el contenido anterior */
+  margin-bottom: 10px !important;  /* Espacio inferior hacia el cuadro de reseñas */
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #e5e7eb;
+}
 .review-form h3 {
   font-size: 0.95rem;
   margin-bottom: 12px; /* Espacio entre el título y el formulario */
@@ -640,7 +647,7 @@ body {
 
 html, body {
   height: 100%;
-  margin-top: 5px;
+  margin-top: 2px;
 }
 
 body {
@@ -702,6 +709,7 @@ body {
   color: #e5e7eb;
   margin-top: 2px;
 }
+
 
 
 
