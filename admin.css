@@ -13,7 +13,7 @@ body {
   font-family: system-ui, sans-serif;
   background: #0f172a;
   color: #e5e7eb;
-  padding: 20px;
+  padding: 15px;
   display: flex;
   justify-content: center;
 }
@@ -21,11 +21,11 @@ body {
 /* ===== CONTENEDOR ===== */
 .admin-container {
   width: 100%;
-  max-width: 900px;
+  max-width: 750px;       /* MÁS PEQUEÑO */
   background: #020617;
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+  padding: 18px;          /* MÁS PEQUEÑO */
+  border-radius: 12px;    /* MÁS PEQUEÑO */
+  box-shadow: 0 0 25px rgba(0,0,0,0.45);
   border: 1px solid rgba(148,163,184,0.25);
 }
 
@@ -34,19 +34,18 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 15px;     /* MÁS PEQUEÑO */
 }
 
 .admin-header-left h1 {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 1.5rem;
-  font-weight: 600;
+  gap: 6px;
+  font-size: 1.15rem;      /* MÁS PEQUEÑO */
 }
 
 .admin-header-left p {
-  font-size: 0.85rem;
+  font-size: 0.75rem;      /* MÁS PEQUEÑO */
   color: #94a3b8;
 }
 
@@ -55,10 +54,10 @@ body {
   background: rgba(127, 29, 29, 0.6);
   color: #fecaca;
   border: 1px solid rgba(248, 113, 113, 0.8);
-  padding: 8px 15px;
+  padding: 5px 10px;       /* MÁS PEQUEÑO */
   border-radius: 999px;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.75rem;      /* MÁS PEQUEÑO */
 }
 
 .btn-logout:hover {
@@ -67,9 +66,9 @@ body {
 
 /* ===== TÍTULOS ===== */
 .panel-section-title {
-  font-size: 1.1rem;
+  font-size: 0.95rem;       /* MÁS PEQUEÑO */
   font-weight: 600;
-  margin: 15px 0;
+  margin: 12px 0;
 }
 
 /* ===== TABLA ===== */
@@ -77,15 +76,15 @@ body {
   width: 100%;
   border-collapse: collapse;
   background: #0f172a;
-  border-radius: 14px;
+  border-radius: 10px;
   overflow: hidden;
-  margin-bottom: 25px;
+  margin-bottom: 18px;
 }
 
 .apps-table th,
 .apps-table td {
-  padding: 10px;
-  font-size: 0.85rem;
+  padding: 7px;             /* MÁS PEQUEÑO */
+  font-size: 0.78rem;       /* MÁS PEQUEÑO */
   border-bottom: 1px solid rgba(55,65,81,0.5);
 }
 
@@ -94,20 +93,25 @@ body {
 }
 
 .table-icon {
-  width: 45px;
-  height: 45px;
-  border-radius: 10px;
+  width: 35px;              /* MÁS PEQUEÑO */
+  height: 35px;
+  border-radius: 8px;
   object-fit: cover;
 }
 
 /* ===== BOTONES DE ACCIÓN ===== */
+.btn-edit,
+.btn-delete {
+  padding: 4px 8px;         /* MÁS PEQUEÑO */
+  font-size: 0.75rem;       /* MÁS PEQUEÑO */
+  border-radius: 6px;
+  cursor: pointer;
+}
+
 .btn-edit {
   background: rgba(59,130,246,0.2);
   border: 1px solid #3b82f6;
   color: #bfdbfe;
-  padding: 6px 10px;
-  border-radius: 8px;
-  cursor: pointer;
 }
 
 .btn-edit:hover {
@@ -118,9 +122,6 @@ body {
   background: rgba(239,68,68,0.2);
   border: 1px solid #ef4444;
   color: #fecaca;
-  padding: 6px 10px;
-  border-radius: 8px;
-  cursor: pointer;
 }
 
 .btn-delete:hover {
@@ -131,11 +132,11 @@ body {
 .form-card {
   background: #0a1126;
   border: 1px solid rgba(75,85,99,0.5);
-  padding: 20px;
-  border-radius: 14px;
+  padding: 15px;             /* MÁS PEQUEÑO */
+  border-radius: 10px;        /* MÁS PEQUEÑO */
   display: grid;
-  grid-template-columns: 1fr 1fr;  /* Ambas columnas ahora tienen el mismo tamaño */
-  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;                  /* MÁS PEQUEÑO */
 }
 
 .form-main-fields,
@@ -145,62 +146,50 @@ body {
 }
 
 .form-group {
-  margin-bottom: 12px;
+  margin-bottom: 10px;        /* MÁS PEQUEÑO */
 }
 
 .form-group label {
-  font-size: 0.85rem;
+  font-size: 0.75rem;         /* MÁS PEQUEÑO */
   color: #94a3b8;
-  margin-bottom: 2px;
-  display: block;
+  margin-bottom: 3px;
 }
 
+/* CAMPOS REDUCIDOS */
 input,
 textarea,
 select {
   width: 100%;
-  padding: 5px;
+  padding: 5px;               /* MÁS PEQUEÑO */
   background: rgba(15,23,42,0.9);
   border: 1px solid rgba(55,65,81,0.8);
-  border-radius: 2px;
+  border-radius: 4px;         /* MÁS PEQUEÑO */
   color: #e5e7eb;
-  min-height: 20px;   /* <<< Ahora TODOS tienen el mismo tamaño */
-}
-
-select {
-  min-height: 20px;
+  font-size: 0.78rem;         /* MÁS PEQUEÑO */
+  min-height: 20px;           /* MÁS PEQUEÑO */
 }
 
 textarea {
-  min-height: 20px;
+  min-height: 40px;           /* MÁS PEQUEÑO PERO USABLE */
 }
 
-/* ===== CAMPO URLS DE CAPTURAS ===== */
+/* ===== CAMPO URLS ===== */
 .form-group input[type="text"] {
-  width: 100%;
-  padding: 6px;
-  font-size: 0.85rem;
-  background-color: rgba(15,23,42,0.9);
-  border: 1px solid rgba(55,65,81,0.8);
-  border-radius: 8px;
-  color: #e5e7eb;
-  margin-bottom: 10px;
+  padding: 5px;
+  font-size: 0.78rem;
+  margin-bottom: 8px;
 }
 
-.form-group label {
-  margin-bottom: 5px;
-}
-
-/* ===== BOTÓN PRINCIPAL ===== */
+/* ===== BOTÓN GUARDAR ===== */
 .btn-primary {
   width: 100%;
   background: linear-gradient(90deg, #2563eb, #4f46e5);
-  padding: 12px;
+  padding: 8px;               /* MÁS PEQUEÑO */
   border: none;
   border-radius: 999px;
   color: white;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 0.85rem;         /* MÁS PEQUEÑO */
 }
 
 .btn-primary:hover {
@@ -208,38 +197,23 @@ textarea {
 }
 
 .status-text {
-  margin-top: 5px;
+  margin-top: 4px;
+  font-size: 0.75rem;
   color: #9ca3af;
 }
 
-.hidden {
-  display: none;
-}
-
+/* ===== BOTÓN TOGGLE ===== */
 .btn-toggle {
   background: rgba(59,130,246,0.3);
   border: 1px solid #3b82f6;
   color: #bfdbfe;
-  padding: 10px 14px;
-  border-radius: 10px;
-  margin-bottom: 15px;
+  padding: 6px 10px;           /* MÁS PEQUEÑO */
+  border-radius: 8px;
+  margin-bottom: 10px;
   cursor: pointer;
-  font-size: 0.9rem;
-  display: inline-block;
+  font-size: 0.78rem;
 }
 
 .btn-toggle:hover {
   background: rgba(59,130,246,0.5);
 }
-
-
-
-
-
-
-
-
-
-
-
-
