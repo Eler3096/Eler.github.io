@@ -14,46 +14,187 @@ function logout() {
 // =======================================================
 let editId = null;
 let prevSize = null;
+
 const appsList = document.getElementById("appsList");
+const appsListWrap = document.getElementById("appsListWrap");
+const loadingMoreEl = document.getElementById("loadingMore");
+const noMoreEl = document.getElementById("noMore");
+const searchInput = document.getElementById("searchInput");
+
+// Paging
+const PAGE_SIZE = 10;
+let lastVisible = null;
+let loading = false;
+let exhausted = false;
+let inSearchMode = false;
+
+// Cache local (items cargados)
+let loadedAppsCache = [];
 
 // =======================================================
-// MODAL APPS SUBIDAS
+// CARGA INICIAL: primeros PAGE_SIZE items
 // =======================================================
-function openAppsModal() {
-  document.getElementById("modalApps").classList.remove("hidden");
-}
-
-function closeAppsModal() {
-  document.getElementById("modalApps").classList.add("hidden");
-}
-
-// =======================================================
-// CARGAR LISTA DE APPS AUTOMÁTICAMENTE
-// =======================================================
-db.collection("apps").orderBy("fecha", "desc").onSnapshot(snap => {
+function resetPagination() {
+  lastVisible = null;
+  exhausted = false;
+  loadedAppsCache = [];
   appsList.innerHTML = "";
+}
 
-  snap.forEach(doc => {
-    const a = doc.data();
+function loadInitialApps() {
+  resetPagination();
+  inSearchMode = false;
+  loadMoreApps();
+}
 
-    const row = `
-      <tr>
-        <td><img src="${a.icono || a.imagen}" class="table-icon"></td>
-        <td>${a.nombre}</td>
-        <td>${a.categoria}</td>
-        <td>${a.version}</td>
+function loadMoreApps() {
+  if (loading || exhausted || inSearchMode) return;
+  loading = true;
+  loadingMoreEl.classList.remove("hidden");
 
+  let query = db.collection("apps").orderBy("fecha", "desc").limit(PAGE_SIZE);
+
+  if (lastVisible) {
+    query = db.collection("apps").orderBy("fecha", "desc").startAfter(lastVisible).limit(PAGE_SIZE);
+  }
+
+  query.get()
+    .then(snap => {
+      if (snap.empty) {
+        exhausted = true;
+        noMoreEl.classList.remove("hidden");
+        loadingMoreEl.classList.add("hidden");
+        loading = false;
+        return;
+      }
+
+      const docs = snap.docs;
+      lastVisible = docs[docs.length - 1];
+
+      const items = docs.map(d => d.data());
+      loadedAppsCache = loadedAppsCache.concat(items);
+
+      renderApps(items, true);
+
+      // si menos de PAGE_SIZE, se acabó
+      if (items.length < PAGE_SIZE) {
+        exhausted = true;
+        noMoreEl.classList.remove("hidden");
+      }
+
+      loadingMoreEl.classList.add("hidden");
+      loading = false;
+    })
+    .catch(err => {
+      console.error("Error cargando apps:", err);
+      loadingMoreEl.classList.add("hidden");
+      loading = false;
+    });
+}
+
+// =======================================================
+// RENDERIZADO DE FILAS
+// append = true para añadir al final
+// =======================================================
+function renderApps(items, append = false) {
+  let html = items.map(a => {
+    return `
+      <tr id="app-row-${a.id}">
+        <td><img src="${a.icono || a.imagen || ''}" class="table-icon" alt="icono"></td>
+        <td>${escapeHtml(a.nombre || '')}</td>
+        <td>${escapeHtml(a.categoria || '')}</td>
+        <td>${escapeHtml(a.version || '')}</td>
         <td>
           <button class="btn-edit" onclick="cargarParaEditar('${a.id}')">✏️ Editar</button>
           <button class="btn-delete" onclick="eliminarApp('${a.id}')">🗑 Eliminar</button>
         </td>
       </tr>
     `;
+  }).join("");
 
-    appsList.innerHTML += row;
+  if (append) {
+    appsList.insertAdjacentHTML('beforeend', html);
+  } else {
+    appsList.innerHTML = html;
+  }
+}
+
+// Pequeña función de escape para evitar inyección
+function escapeHtml(str) {
+  return (str + '').replace(/[&<>"'`=\/]/g, function(s) {
+    return ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;',
+      '/': '&#x2F;',
+      '`': '&#x60;',
+      '=': '&#x3D;'
+    })[s];
   });
+}
+
+// =======================================================
+// BÚSQUEDA POR NOMBRE (usa consulta por prefijo en Firestore)
+// Si hay texto, entramos en modo búsqueda y mostramos resultados.
+// Si el campo queda vacío, volvemos a paginación normal.
+// =======================================================
+let searchTimer = null;
+searchInput.addEventListener('input', e => {
+  const term = e.target.value.trim();
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    if (!term) {
+      // volver a paginación normal
+      inSearchMode = false;
+      noMoreEl.classList.add("hidden");
+      loadInitialApps();
+      return;
+    }
+    performSearch(term);
+  }, 350);
 });
 
+function performSearch(term) {
+  inSearchMode = true;
+  loadingMoreEl.classList.remove("hidden");
+  noMoreEl.classList.add("hidden");
+  appsList.innerHTML = "";
+
+  const start = term;
+  const end = term + '\uf8ff';
+
+  // Usamos orderBy "nombre" y startAt/endAt para un prefijo simple (necesita index si lo requiere)
+  db.collection("apps").orderBy("nombre").startAt(start).endAt(end).limit(100).get()
+    .then(snap => {
+      if (snap.empty) {
+        appsList.innerHTML = '<tr><td colspan="5" style="padding:12px;color:#94a3b8">No se encontraron aplicaciones</td></tr>';
+        loadingMoreEl.classList.add("hidden");
+        return;
+      }
+      const items = snap.docs.map(d => d.data());
+      // opcional: ordenar por fecha descendente localmente si lo deseas
+      items.sort((a,b) => (b.fecha || 0) - (a.fecha || 0));
+      renderApps(items, false);
+      loadingMoreEl.classList.add("hidden");
+    })
+    .catch(err => {
+      console.error("Error en búsqueda:", err);
+      loadingMoreEl.classList.add("hidden");
+    });
+}
+
+// =======================================================
+// SCROLL INFINITO: cuando el contenedor de apps se acerque al final, cargar más
+// =======================================================
+appsListWrap.addEventListener('scroll', () => {
+  if (inSearchMode) return; // no paginar durante búsqueda
+  const { scrollTop, scrollHeight, clientHeight } = appsListWrap;
+  if (scrollTop + clientHeight >= scrollHeight - 160) {
+    loadMoreApps();
+  }
+});
 
 // =======================================================
 // CARGAR APP PARA EDITAR
@@ -68,13 +209,13 @@ function cargarParaEditar(id) {
     const a = doc.data();
 
     // Campos principales
-    document.getElementById("nombre").value = a.nombre;
-    document.getElementById("descripcion").value = a.descripcion;
-    document.getElementById("version").value = a.version;
-    document.getElementById("categoria").value = a.categoria;
-    document.getElementById("idioma").value = a.idioma;
-    document.getElementById("tipo").value = a.tipo;
-    document.getElementById("internet").value = a.internet;
+    document.getElementById("nombre").value = a.nombre || '';
+    document.getElementById("descripcion").value = a.descripcion || '';
+    document.getElementById("version").value = a.version || '';
+    document.getElementById("categoria").value = a.categoria || '';
+    document.getElementById("idioma").value = a.idioma || '';
+    document.getElementById("tipo").value = a.tipo || '';
+    document.getElementById("internet").value = a.internet || 'offline';
 
     // Extras
     document.getElementById("sistema").value = a.sistemaOperativo || "";
@@ -97,7 +238,6 @@ function cargarParaEditar(id) {
   });
 }
 
-
 // =======================================================
 // ELIMINAR APP
 // =======================================================
@@ -105,13 +245,20 @@ function eliminarApp(id) {
   if (!confirm("¿Eliminar esta aplicación?")) return;
 
   db.collection("apps").doc(id).delete()
-  .then(() => alert("Aplicación eliminada ✔"))
+  .then(() => {
+    alert("Aplicación eliminada ✔");
+    // eliminar de la UI
+    const row = document.getElementById(`app-row-${id}`);
+    if (row) row.remove();
+    // actualizar cache local
+    loadedAppsCache = loadedAppsCache.filter(a => a.id !== id);
+  })
   .catch(err => alert("Error: " + err.message));
 }
 
-
 // =======================================================
 // GUARDAR / EDITAR APP
+// (se mantiene la lógica que tenías, con subida de archivos)
 // =======================================================
 async function guardarApp() {
 
@@ -219,13 +366,21 @@ async function guardarApp() {
       btn.textContent = "SUBIR APP";
 
       limpiarFormulario();
+
+      // actualizar UI: si no estamos en búsqueda, recargar inicial para ver cambios
+      if (!inSearchMode) {
+        loadInitialApps();
+      } else {
+        // si estamos en búsqueda, refrescar la búsqueda actual
+        const currentSearch = searchInput.value.trim();
+        if (currentSearch) performSearch(currentSearch);
+      }
     })
     .catch(err => {
       estado.textContent = "Error: " + err.message;
       btn.disabled = false;
     });
 }
-
 
 // =======================================================
 // LIMPIAR FORMULARIO
@@ -239,9 +394,20 @@ function limpiarFormulario() {
   internet.value = "offline";
   anuncios.value = "no";
 
-  imagen.value = "";
-  apk.value = "";
-  capturas.value = "";
+  // reset archivos
+  const imagenEl = document.getElementById("imagen");
+  const apkEl = document.getElementById("apk");
+  const capturasEl = document.getElementById("capturas");
+  if (imagenEl) imagenEl.value = "";
+  if (apkEl) apkEl.value = "";
+  if (capturasEl) capturasEl.value = "";
 
   prevSize = null;
 }
+
+// =======================================================
+// Inicializar carga al abrir la página
+// =======================================================
+document.addEventListener('DOMContentLoaded', () => {
+  loadInitialApps();
+});
