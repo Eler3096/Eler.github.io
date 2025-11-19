@@ -258,13 +258,13 @@ body {
   display: block;
 }
 /* ===================================================
-  TEXTOS DEL SELECTOR DE ARCHIVOS
+  TAMAÑO DE TEXTOS DEL SELECTOR DE ARCHIVOS
 =================================================== */
 input,
 textarea,
 select {
   width: 100%;
-  padding: 5px 6px;
+  padding: 4px 6px;
   background: rgba(15,23,42,0.95);
   border: 1px solid rgba(55,65,81,0.9);
   border-radius: 6px;
@@ -292,7 +292,9 @@ textarea {
 .form-group input[type="file"] {
   border-radius: 8px;
 }
-
+/* ===================================================
+   tamaño texto dentro del area ecribir
+=================================================== */
 .form-group input[type="text"] {
   font-size: 0.7rem;
 }
@@ -307,7 +309,7 @@ textarea {
   padding: 8px 26px;
   background: linear-gradient(90deg, #2563eb, #4f46e5);
   border: none;
-  border-radius: 999px;
+  border-radius: 10px;
   color: #f9fafb;
   cursor: pointer;
   font-size: 0.85rem;
@@ -391,6 +393,7 @@ textarea {
   align-items: center;
   margin-bottom: 12px;
 }
+
 
 
 
