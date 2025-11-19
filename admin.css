@@ -240,6 +240,7 @@ body {
   column-gap: 14px;
   row-gap: 8px;
   margin-top: 6px;
+  position: relative; /* Esto es importante para que el botón se posicione relativo a este contenedor */
 }
 
 /* Hacemos que todos los form-group participen del grid */
@@ -395,4 +396,5 @@ textarea {
     text-align: center;
   }
 }
+
 
