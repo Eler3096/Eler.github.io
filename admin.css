@@ -242,13 +242,11 @@ body {
   margin-top: 6px;
 }
 
-/* Hacemos que todos los form-group participen del grid */
 .form-main-fields,
 .form-side-fields {
   display: contents;
 }
 
-/* Cada campo */
 .form-group {
   margin-bottom: 4px;
 }
@@ -260,7 +258,6 @@ body {
   display: block;
 }
 
-/* Campos de formulario */
 input,
 textarea,
 select {
@@ -283,20 +280,17 @@ select:focus {
   background: rgba(15,23,42,1);
 }
 
-/* Textarea un poco más alta */
 textarea {
   min-height: 60px;
   resize: vertical;
 }
 
-/* Inputs de texto un poquito más redondeados */
 .form-group input[type="text"],
 .form-group input[type="url"],
 .form-group input[type="file"] {
   border-radius: 8px;
 }
 
-/* Campo URLs capturas */
 .form-group input[type="text"] {
   font-size: 0.85rem;
 }
@@ -340,7 +334,6 @@ textarea {
   display: none !important;
 }
 
-/* Loading / no more */
 .loading-more,
 .no-more {
   text-align: center;
@@ -368,8 +361,6 @@ textarea {
 }
 
 @media (max-width: 800px) {
-  /* En pantallas pequeñas mantenemos el formulario y escondemos la sidebar
-     o la colocamos por debajo para no romper UX móvil */
   .admin-main {
     flex-direction: column;
   }
