@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Panel Administrador</title>
+  <title>AppsMart Admin</title>
   <link rel="stylesheet" href="admin.css">
 </head>
 
@@ -10,56 +10,45 @@
 
 <div class="admin-container">
 
+  <!-- =======================================================
+       HEADER
+  ======================================================= -->
   <header class="admin-header">
+
     <div class="admin-header-left">
       <h1><span class="icon">⚙️</span> AppsMart Admin</h1>
       <p>Subir, editar y manejar aplicaciones</p>
-      
     </div>
+
+    <!-- Botones superiores -->
     <button class="btn-logout" onclick="logout()">Cerrar sesión</button>
-    <!-- ============ BOTÓN PARA MOSTRAR / OCULTAR ============ -->
-    <button id="toggleBtn" class="btn-toggle" onclick="toggleApps()">📦 Apps Subidas</button>
+    <button id="toggleBtn" class="btn-toggle" onclick="openAppsModal()">📦 Apps Subidas</button>
+
   </header>
 
-  <!-- ============ LISTADO OCULTO AL INICIO ============ -->
-  <div id="appsContainer" class="hidden">
-    <h3 class="panel-section-title">📦 Aplicaciones Publicadas</h3>
 
-    <table class="apps-table">
-      <thead>
-        <tr>
-          <th>Icono</th>
-          <th>Nombre</th>
-          <th>Categoría</th>
-          <th>Versión</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="appsList"></tbody>
-    </table>
-  </div>
+  <!-- =======================================================
+       FORMULARIO PRINCIPAL
+  ======================================================= -->
 
-  <!-- ============ FORMULARIO ============ -->
   <h3 class="panel-section-title" id="formTitle">➕ Nueva Aplicación</h3>
 
   <div class="form-card">
 
-    <!-- Columna principal -->
-     <div class="form-main-fields">
+    <div class="form-main-fields">
 
-        <!-- Columna 1-->
-     <div class="form-group">
+      <!-- Columnas 1–3 repartidas automáticamente gracias al grid -->
+
+      <div class="form-group">
         <label>Nombre</label>
         <input id="nombre" type="text">
       </div>
 
-       	<!-- Columna 2-->
       <div class="form-group">
         <label>Tamaño de la App (MB/GB)</label>
         <input id="size" type="text" placeholder="Ej: 120 MB, 1.5 GB">
       </div>
-       
-   <!-- Columna 3-->
+
       <div class="form-group">
         <label>Categoría</label>
         <select id="categoria">
@@ -75,20 +64,17 @@
         </select>
       </div>
 
-       <!-- Columna 1-->
       <div class="form-group">
         <label>Descripción</label>
         <textarea id="descripcion"></textarea>
       </div>
 
-       	<!-- Columna 2-->
- <div class="form-group">
+      <div class="form-group">
         <label>Fecha de actualización</label>
         <input id="fechaAct" type="date">
       </div>
 
-       <!-- Columna 3-->
-     <div class="form-group">
+      <div class="form-group">
         <label>Tipo</label>
         <select id="tipo">
           <option>Gratis</option>
@@ -96,20 +82,17 @@
         </select>
       </div>
 
-       <!-- Columna 1-->
       <div class="form-group">
         <label>Versión</label>
         <input id="version" type="text">
       </div>
 
-       	<!-- Columna 2-->
       <div class="form-group">
         <label>Política de privacidad (URL)</label>
         <input id="privacidad" type="text" placeholder="https://...">
       </div>
 
-       <!-- Columna 3-->
-       <div class="form-group">
+      <div class="form-group">
         <label>Conexión</label>
         <select id="internet">
           <option value="offline">Funciona sin Internet</option>
@@ -117,19 +100,16 @@
         </select>
       </div>
 
-       	<!-- Columna 1-->
       <div class="form-group">
         <label>Sistema Operativo</label>
         <input id="sistema" type="text" placeholder="Ej: Android">
       </div>
 
-      <!-- Columna 2-->
       <div class="form-group">
         <label>URL Imagen Principal (GitHub RAW u otra)</label>
         <input id="imagenUrl" type="text" placeholder="https://...">
       </div>
 
-       <!-- Columna 3-->
       <div class="form-group">
         <label>¿Contiene anuncios?</label>
         <select id="anuncios">
@@ -137,73 +117,94 @@
           <option value="no">No contiene</option>
         </select>
       </div>
-       
-<!-- Columna 1-->
+
       <div class="form-group">
         <label>Requisitos del sistema</label>
         <input id="requisitos" type="text" placeholder="Ej: Android 5.0+">
       </div>
 
-       <!-- Columna 2-->
-     <div class="form-group">
+      <div class="form-group">
         <label>URLs de Capturas (separadas por coma)</label>
         <input id="capturasUrl" type="text" placeholder="url1,url2,url3">
       </div>
 
-       <!-- Columna 3-->
-      <!-- Subir archivos -->
       <div class="form-group">
         <label>Capturas secundarias (máx 6)</label>
         <input id="capturas" type="file" accept="image/*" multiple>
       </div>
 
-       <!-- Columna 1-->
       <div class="form-group">
         <label>Edad recomendada</label>
         <input id="edad" type="text" placeholder="Ej: +13, +16">
       </div>
 
-       <!-- Columna 2-->
       <div class="form-group">
         <label>URL del Icono (GitHub RAW u otra)</label>
         <input id="iconoUrl" type="text" placeholder="https://...">
       </div>
 
-       <!-- Columna 3-->
       <div class="form-group">
         <label>APK (solo si deseas cambiarla)</label>
         <input id="apk" type="file" accept=".apk">
       </div>
 
-       <!-- Columna 1-->
       <div class="form-group">
         <label>Idioma</label>
         <input id="idioma" type="text">
       </div>
 
-       <!-- Columna 2-->
       <div class="form-group">
         <label>URL del APK (enlace directo)</label>
         <input id="apkUrl" type="text" placeholder="https://...">
       </div>
 
-       <!-- Columna 3-->
       <div class="form-group">
         <label>Imagen (solo si deseas cambiarla)</label>
         <input id="imagen" type="file" accept="image/*">
       </div>
- </div>
-      <button id="subirBtn" class="btn-primary" onclick="guardarApp()">SUBIR APP</button>
-
-      <p class="status-text" id="estado"></p>
 
     </div>
+
+    <!-- Botón guardar -->
+    <button id="subirBtn" class="btn-primary" onclick="guardarApp()">SUBIR APP</button>
+    <p class="status-text" id="estado"></p>
 
   </div>
 
 </div>
 
-<!-- Firebase -->
+
+<!-- =======================================================
+     MODAL APPS SUBIDAS
+======================================================= -->
+<div id="modalApps" class="modal-bg hidden">
+  <div class="modal-content">
+
+    <button class="modal-close" onclick="closeAppsModal()">Cerrar</button>
+
+    <h3 class="panel-section-title">📦 Aplicaciones Publicadas</h3>
+
+    <table class="apps-table">
+      <thead>
+        <tr>
+          <th>Icono</th>
+          <th>Nombre</th>
+          <th>Categoría</th>
+          <th>Versión</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="appsList"></tbody>
+    </table>
+
+  </div>
+</div>
+
+
+
+<!-- =======================================================
+     SCRIPTS FIREBASE
+======================================================= -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -214,10 +215,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
