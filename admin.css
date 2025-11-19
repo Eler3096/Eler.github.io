@@ -238,7 +238,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: 14px;
-  row-gap: 8px;
+  row-gap: 4px;
   margin-top: 6px;
 }
 
@@ -252,7 +252,7 @@ body {
 }
 
 .form-group label {
-  font-size: 0.8rem;
+  font-size: 0.5rem;
   color: #9ca3af;
   margin-bottom: 3px;
   display: block;
@@ -389,6 +389,7 @@ textarea {
   align-items: center;
   margin-bottom: 12px;
 }
+
 
 
 
