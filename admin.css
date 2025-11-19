@@ -134,9 +134,16 @@ body {
   padding: 20px;
   border-radius: 14px;
   display: grid;
-  grid-template-columns: 1fr 1fr;  /* Ambas columnas ahora tienen el mismo tamaño */
+  grid-template-columns: repeat(3, 1fr); /* ★ Ahora son 3 columnas */
   gap: 20px;
 }
+
+/* Hace que los contenidos internos se repartan en el grid */
+.form-main-fields,
+.form-side-fields {
+  display: contents; /* ★ Permite que cada form-group ocupe su propia columna */
+}
+
 
 .form-main-fields,
 .form-side-fields {
@@ -231,4 +238,5 @@ textarea {
 .btn-toggle:hover {
   background: rgba(59,130,246,0.5);
 }
+
 
