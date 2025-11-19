@@ -135,7 +135,7 @@ body {
   border-radius: 14px;
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* ★ Ahora son 3 columnas */
-  gap: 20px;
+  gap: 8px;
   
 }
 
