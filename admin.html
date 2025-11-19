@@ -30,16 +30,18 @@
     ======================================================= -->
     <div class="form-area">
 
-      <h3 class="panel-section-title" id="formTitle">➕ Nueva Aplicación</h3>
+      <!-- TÍTULO + BOTÓN A LA DERECHA -->
+      <div class="form-title-row">
+        <h3 class="panel-section-title" id="formTitle">➕ Nueva Aplicación</h3>
 
-      <button id="subirBtn" class="btn-primary" onclick="guardarApp()">SUBIR APP</button>
+        <button id="subirBtn" class="btn-primary" onclick="guardarApp()">SUBIR APP</button>
+      </div>
+
       <p class="status-text" id="estado"></p>
 
       <!-- FORM-CARD -->
       <div class="form-card">
         <div class="form-main-fields">
-
-          <!-- ====== CAMPOS ====== -->
 
           <div class="form-group">
             <label>Nombre</label>
@@ -165,9 +167,9 @@
             <input id="imagen" type="file" accept="image/*">
           </div>
 
-        </div> <!-- form-main-fields -->
-      </div> <!-- form-card -->
-    </div> <!-- form-area -->
+        </div>
+      </div>
+    </div>
 
     <!-- =======================================================
          SIDEBAR APPS (DERECHA)
@@ -179,7 +181,7 @@
         <input id="searchInput" type="search" placeholder="🔍 Buscar por nombre...">
       </div>
 
-      <!-- ⭐⭐⭐ FIX: se agregó id="appsListWrap" ⭐⭐⭐ -->
+      <!-- 🔥 AÑADÍ EL ID QUE NECESITABA PARA QUE SE MUESTREN LAS APPS -->
       <div id="appsListWrap" class="apps-list-wrap">
 
         <table class="apps-table">
@@ -197,14 +199,13 @@
 
         <div id="loadingMore" class="loading-more hidden">Cargando más apps...</div>
         <div id="noMore" class="no-more hidden">No hay más apps</div>
-
       </div>
 
     </aside>
 
-  </div> <!-- admin-main -->
+  </div>
 
-</div> <!-- admin-container -->
+</div>
 
 <!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
