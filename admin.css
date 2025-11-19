@@ -240,7 +240,6 @@ body {
   column-gap: 14px;
   row-gap: 8px;
   margin-top: 6px;
-  position: relative; /* Asegura que los elementos posicionados absolutamente estén dentro de este contenedor */
 }
 
 /* Hacemos que todos los form-group participen del grid */
@@ -306,6 +305,9 @@ textarea {
    BOTÓN PRINCIPAL GUARDAR
 =================================================== */
 .btn-primary {
+  grid-column: span 3;
+  justify-self: flex-start;
+  width: auto;
   padding: 8px 26px;
   background: linear-gradient(90deg, #2563eb, #4f46e5);
   border: none;
@@ -314,6 +316,7 @@ textarea {
   cursor: pointer;
   font-size: 0.85rem;
   font-weight: 500;
+  margin-top: 6px;
   transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
 }
 
@@ -322,7 +325,6 @@ textarea {
   transform: translateY(-1px);
   box-shadow: 0 10px 22px rgba(37, 99, 235, 0.45);
 }
-
 
 .status-text {
   grid-column: span 3;
@@ -390,6 +392,3 @@ textarea {
     text-align: center;
   }
 }
-
-
-
