@@ -131,11 +131,11 @@ body {
 .form-card {
   background: #0a1126;
   border: 1px solid rgba(75,85,99,0.5);
-  padding: 20px;
+  padding: 15px;
   border-radius: 14px;
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* ★ Ahora son 3 columnas */
-  column-gap: 8px !important; /* ★ separa columnas */
+  column-gap: 12px !important; /* ★ separa columnas */
   row-gap: 2px;
   
 }
@@ -196,13 +196,13 @@ textarea {
 .btn-primary {
   justify-self: start;  /* 🔥 Controla su alineación en el grid */
   width: fit-content !important; /* 🔥 Asegura que no crezca */
-  padding: 6px 14px;
+  padding: 6px 20px;
   background: linear-gradient(90deg, #2563eb, #4f46e5);
   border: none;
   border-radius: 999px;
   color: white;
   cursor: pointer;
-  font-size: 0.65rem;
+  font-size: 0.75rem;
 }
 
 .btn-primary:hover {
@@ -233,6 +233,7 @@ textarea {
 .btn-toggle:hover {
   background: rgba(59,130,246,0.5);
 }
+
 
 
 
