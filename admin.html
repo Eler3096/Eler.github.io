@@ -47,41 +47,19 @@
     <!-- Columna principal -->
      <div class="form-main-fields">
 
-      <div class="form-group">
+        <!-- Columna 1-->
+     <div class="form-group">
         <label>Nombre</label>
         <input id="nombre" type="text">
       </div>
 
+       	<!-- Columna 2-->
       <div class="form-group">
-        <label>Descripción</label>
-        <textarea id="descripcion"></textarea>
+        <label>Tamaño de la App (MB/GB)</label>
+        <input id="size" type="text" placeholder="Ej: 120 MB, 1.5 GB">
       </div>
-
-      <div class="form-group">
-        <label>Versión</label>
-        <input id="version" type="text">
-      </div>
-
-      <div class="form-group">
-        <label>Sistema Operativo</label>
-        <input id="sistema" type="text" placeholder="Ej: Android">
-      </div>
-
-      <div class="form-group">
-        <label>Requisitos del sistema</label>
-        <input id="requisitos" type="text" placeholder="Ej: Android 5.0+">
-      </div>
-
-      <div class="form-group">
-        <label>Fecha de actualización</label>
-        <input id="fechaAct" type="date">
-      </div>
-
-      <div class="form-group">
-        <label>Edad recomendada</label>
-        <input id="edad" type="text" placeholder="Ej: +13, +16">
-      </div>
-
+       
+   <!-- Columna 3-->
       <div class="form-group">
         <label>Categoría</label>
         <select id="categoria">
@@ -97,11 +75,20 @@
         </select>
       </div>
 
+       <!-- Columna 1-->
       <div class="form-group">
-        <label>Idioma</label>
-        <input id="idioma" type="text">
+        <label>Descripción</label>
+        <textarea id="descripcion"></textarea>
       </div>
+
+       	<!-- Columna 2-->
  <div class="form-group">
+        <label>Fecha de actualización</label>
+        <input id="fechaAct" type="date">
+      </div>
+
+       <!-- Columna 3-->
+     <div class="form-group">
         <label>Tipo</label>
         <select id="tipo">
           <option>Gratis</option>
@@ -109,7 +96,19 @@
         </select>
       </div>
 
-  
+       <!-- Columna 1-->
+      <div class="form-group">
+        <label>Versión</label>
+        <input id="version" type="text">
+      </div>
+
+       	<!-- Columna 2-->
+      <div class="form-group">
+        <label>Política de privacidad (URL)</label>
+        <input id="privacidad" type="text" placeholder="https://...">
+      </div>
+
+       <!-- Columna 3-->
        <div class="form-group">
         <label>Conexión</label>
         <select id="internet">
@@ -117,65 +116,83 @@
           <option value="online">Requiere Internet</option>
         </select>
       </div>
-   </div>
-        <!-- Columna 2 -->
-    <div class="form-side-fields">
 
-<div class="form-group">
+       	<!-- Columna 1-->
+      <div class="form-group">
+        <label>Sistema Operativo</label>
+        <input id="sistema" type="text" placeholder="Ej: Android">
+      </div>
+
+      <!-- Columna 2-->
+      <div class="form-group">
+        <label>URL Imagen Principal (GitHub RAW u otra)</label>
+        <input id="imagenUrl" type="text" placeholder="https://...">
+      </div>
+
+       <!-- Columna 3-->
+      <div class="form-group">
         <label>¿Contiene anuncios?</label>
         <select id="anuncios">
           <option value="si">Sí contiene</option>
           <option value="no">No contiene</option>
         </select>
       </div>
-      
+       
+<!-- Columna 1-->
       <div class="form-group">
-        <label>Política de privacidad (URL)</label>
-        <input id="privacidad" type="text" placeholder="https://...">
+        <label>Requisitos del sistema</label>
+        <input id="requisitos" type="text" placeholder="Ej: Android 5.0+">
       </div>
 
-      <!-- Campos URL -->
-      <div class="form-group">
-        <label>URL Imagen Principal (GitHub RAW u otra)</label>
-        <input id="imagenUrl" type="text" placeholder="https://...">
-      </div>
-
-      <div class="form-group">
+       <!-- Columna 2-->
+     <div class="form-group">
         <label>URLs de Capturas (separadas por coma)</label>
         <input id="capturasUrl" type="text" placeholder="url1,url2,url3">
       </div>
 
-      <div class="form-group">
-        <label>URL del Icono (GitHub RAW u otra)</label>
-        <input id="iconoUrl" type="text" placeholder="https://...">
-      </div>
-
-      <div class="form-group">
-        <label>URL del APK (enlace directo)</label>
-        <input id="apkUrl" type="text" placeholder="https://...">
-      </div>
-
-      <div class="form-group">
-        <label>Tamaño de la App (MB/GB)</label>
-        <input id="size" type="text" placeholder="Ej: 120 MB, 1.5 GB">
-      </div>
-
+       <!-- Columna 3-->
       <!-- Subir archivos -->
       <div class="form-group">
         <label>Capturas secundarias (máx 6)</label>
         <input id="capturas" type="file" accept="image/*" multiple>
       </div>
 
+       <!-- Columna 1-->
+      <div class="form-group">
+        <label>Edad recomendada</label>
+        <input id="edad" type="text" placeholder="Ej: +13, +16">
+      </div>
+
+       <!-- Columna 2-->
+      <div class="form-group">
+        <label>URL del Icono (GitHub RAW u otra)</label>
+        <input id="iconoUrl" type="text" placeholder="https://...">
+      </div>
+
+       <!-- Columna 3-->
       <div class="form-group">
         <label>APK (solo si deseas cambiarla)</label>
         <input id="apk" type="file" accept=".apk">
       </div>
 
+       <!-- Columna 1-->
+      <div class="form-group">
+        <label>Idioma</label>
+        <input id="idioma" type="text">
+      </div>
+
+       <!-- Columna 2-->
+      <div class="form-group">
+        <label>URL del APK (enlace directo)</label>
+        <input id="apkUrl" type="text" placeholder="https://...">
+      </div>
+
+       <!-- Columna 3-->
       <div class="form-group">
         <label>Imagen (solo si deseas cambiarla)</label>
         <input id="imagen" type="file" accept="image/*">
       </div>
-
+ </div>
       <button id="subirBtn" class="btn-primary" onclick="guardarApp()">SUBIR APP</button>
 
       <p class="status-text" id="estado"></p>
@@ -197,6 +214,7 @@
 
 </body>
 </html>
+
 
 
 
