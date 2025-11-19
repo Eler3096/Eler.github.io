@@ -131,11 +131,12 @@ body {
 .form-card {
   background: #0a1126;
   border: 1px solid rgba(75,85,99,0.5);
-  padding: 10px;
+  padding: 20px;
   border-radius: 14px;
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* ★ Ahora son 3 columnas */
   gap: 20px;
+  
 }
 
 /* Hace que los contenidos internos se repartan en el grid */
@@ -145,7 +146,7 @@ body {
 }
 
 .form-group {
-  margin-bottom: 12px;
+  margin-bottom: 5px;
 }
 
 .form-group label {
@@ -231,6 +232,7 @@ textarea {
 .btn-toggle:hover {
   background: rgba(59,130,246,0.5);
 }
+
 
 
 
