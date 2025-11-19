@@ -18,10 +18,10 @@
     <button class="btn-logout" onclick="logout()">Cerrar sesión</button>
   </header>
 
-  <!-- ============ BOTÓN PARA MOSTRAR / OCULTAR ============ -->
+  <!-- Toggle -->
   <button id="toggleBtn" class="btn-toggle" onclick="toggleApps()">📦 Apps Subidas</button>
 
-  <!-- ============ LISTADO OCULTO AL INICIO ============ -->
+  <!-- Listado -->
   <div id="appsContainer" class="hidden">
     <h3 class="panel-section-title">📦 Aplicaciones Publicadas</h3>
 
@@ -39,20 +39,19 @@
     </table>
   </div>
 
-  <!-- ============ FORMULARIO ============ -->
+  <!-- Formulario -->
   <h3 class="panel-section-title" id="formTitle">➕ Nueva Aplicación</h3>
 
   <div class="form-card">
 
-    <!-- Columna principal -->
-    <div class="form-main-fields">
-
+      <!-- === CAMPO 1 === -->
       <div class="form-group">
         <label>Nombre</label>
         <input id="nombre" type="text">
       </div>
 
-      <div class="form-group">
+      <!-- === CAMPO 2 (full width) === -->
+      <div class="form-group full-width">
         <label>Descripción</label>
         <textarea id="descripcion"></textarea>
       </div>
@@ -101,7 +100,8 @@
         <label>Idioma</label>
         <input id="idioma" type="text">
       </div>
- <div class="form-group">
+
+      <div class="form-group">
         <label>Tipo</label>
         <select id="tipo">
           <option>Gratis</option>
@@ -116,10 +116,6 @@
           <option value="online">Requiere Internet</option>
         </select>
       </div>
-    </div>
-
-    <!-- Columna secundaria -->
-    <div class="form-side-fields">
 
       <div class="form-group">
         <label>¿Contiene anuncios?</label>
@@ -134,33 +130,31 @@
         <input id="privacidad" type="text" placeholder="https://...">
       </div>
 
-      <!-- Campos URL -->
-      <div class="form-group">
+      <div class="form-group full-width">
         <label>URL Imagen Principal (GitHub RAW u otra)</label>
         <input id="imagenUrl" type="text" placeholder="https://...">
       </div>
 
-      <div class="form-group">
+      <div class="form-group full-width">
         <label>URLs de Capturas (separadas por coma)</label>
         <input id="capturasUrl" type="text" placeholder="url1,url2,url3">
       </div>
 
       <div class="form-group">
-        <label>URL del Icono (GitHub RAW u otra)</label>
+        <label>URL del Icono</label>
         <input id="iconoUrl" type="text" placeholder="https://...">
       </div>
 
       <div class="form-group">
-        <label>URL del APK (enlace directo)</label>
+        <label>URL del APK</label>
         <input id="apkUrl" type="text" placeholder="https://...">
       </div>
 
       <div class="form-group">
-        <label>Tamaño de la App (MB/GB)</label>
+        <label>Tamaño de la App</label>
         <input id="size" type="text" placeholder="Ej: 120 MB, 1.5 GB">
       </div>
 
-      <!-- Subir archivos -->
       <div class="form-group">
         <label>Capturas secundarias (máx 6)</label>
         <input id="capturas" type="file" accept="image/*" multiple>
@@ -176,15 +170,15 @@
         <input id="imagen" type="file" accept="image/*">
       </div>
 
+      <!-- BOTÓN SUBIR -->
       <button id="subirBtn" class="btn-primary" onclick="guardarApp()">SUBIR APP</button>
 
       <p class="status-text" id="estado"></p>
 
-    </div>
-
   </div>
 
 </div>
+
 
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -197,5 +191,3 @@
 
 </body>
 </html>
-
-
