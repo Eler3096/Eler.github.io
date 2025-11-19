@@ -173,7 +173,7 @@ textarea {
 /* ===== CAMPO URLS DE CAPTURAS ===== */
 .form-group input[type="text"] {
   width: 100%;
-  padding: 12px;
+  padding: 6px;
   font-size: 0.85rem;
   background-color: rgba(15,23,42,0.9);
   border: 1px solid rgba(55,65,81,0.8);
@@ -226,6 +226,7 @@ textarea {
 .btn-toggle:hover {
   background: rgba(59,130,246,0.5);
 }
+
 
 
 
