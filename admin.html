@@ -18,29 +18,28 @@
       <p>Subir, editar y manejar aplicaciones</p>
     </div>
 
-    <!-- Botón logout -->
     <button class="btn-logout" onclick="logout()">Cerrar sesión</button>
 
   </header>
 
-  <!-- MAIN: formulario a la izquierda + sidebar apps a la derecha -->
+  <!-- MAIN -->
   <div class="admin-main">
 
     <!-- =======================================================
-         FORMULARIO PRINCIPAL (izquierda)
+         FORMULARIO (IZQUIERDA)
     ======================================================= -->
     <div class="form-area">
+
       <h3 class="panel-section-title" id="formTitle">➕ Nueva Aplicación</h3>
-        
-        <!-- Botón guardar -->
-        <button id="subirBtn" class="btn-primary" onclick="guardarApp()">SUBIR APP</button>
-        <p class="status-text" id="estado"></p>
-    
-      
+
+      <button id="subirBtn" class="btn-primary" onclick="guardarApp()">SUBIR APP</button>
+      <p class="status-text" id="estado"></p>
+
+      <!-- FORM-CARD -->
       <div class="form-card">
         <div class="form-main-fields">
 
-          <!-- Columnas 1–3 repartidas automáticamente gracias al grid -->
+          <!-- ====== CAMPOS ====== -->
 
           <div class="form-group">
             <label>Nombre</label>
@@ -49,7 +48,7 @@
 
           <div class="form-group">
             <label>Tamaño de la App (MB/GB)</label>
-            <input id="size" type="text" placeholder="Ej: 120 MB, 1.5 GB">
+            <input id="size" type="text">
           </div>
 
           <div class="form-group">
@@ -92,7 +91,7 @@
 
           <div class="form-group">
             <label>Política de privacidad (URL)</label>
-            <input id="privacidad" type="text" placeholder="https://...">
+            <input id="privacidad" type="text">
           </div>
 
           <div class="form-group">
@@ -105,12 +104,12 @@
 
           <div class="form-group">
             <label>Sistema Operativo</label>
-            <input id="sistema" type="text" placeholder="Ej: Android">
+            <input id="sistema" type="text">
           </div>
 
           <div class="form-group">
-            <label>URL Imagen Principal (GitHub RAW u otra)</label>
-            <input id="imagenUrl" type="text" placeholder="https://...">
+            <label>URL Imagen Principal</label>
+            <input id="imagenUrl" type="text">
           </div>
 
           <div class="form-group">
@@ -123,31 +122,31 @@
 
           <div class="form-group">
             <label>Requisitos del sistema</label>
-            <input id="requisitos" type="text" placeholder="Ej: Android 5.0+">
+            <input id="requisitos" type="text">
           </div>
 
           <div class="form-group">
-            <label>URLs de Capturas (separadas por coma)</label>
-            <input id="capturasUrl" type="text" placeholder="url1,url2,url3">
+            <label>URLs de Capturas</label>
+            <input id="capturasUrl" type="text">
           </div>
 
           <div class="form-group">
-            <label>Capturas secundarias (máx 6)</label>
+            <label>Capturas secundarias</label>
             <input id="capturas" type="file" accept="image/*" multiple>
           </div>
 
           <div class="form-group">
             <label>Edad recomendada</label>
-            <input id="edad" type="text" placeholder="Ej: +13, +16">
+            <input id="edad" type="text">
           </div>
 
           <div class="form-group">
-            <label>URL del Icono (GitHub RAW u otra)</label>
-            <input id="iconoUrl" type="text" placeholder="https://...">
+            <label>URL del Icono</label>
+            <input id="iconoUrl" type="text">
           </div>
 
           <div class="form-group">
-            <label>APK (solo si deseas cambiarla)</label>
+            <label>APK (subir nueva)</label>
             <input id="apk" type="file" accept=".apk">
           </div>
 
@@ -157,26 +156,30 @@
           </div>
 
           <div class="form-group">
-            <label>URL del APK (enlace directo)</label>
-            <input id="apkUrl" type="text" placeholder="https://...">
+            <label>URL del APK</label>
+            <input id="apkUrl" type="text">
           </div>
 
           <div class="form-group">
-            <label>Imagen (solo si deseas cambiarla)</label>
+            <label>Imagen</label>
             <input id="imagen" type="file" accept="image/*">
           </div>
-    </div>
+
+        </div> <!-- form-main-fields -->
+      </div> <!-- form-card -->
+    </div> <!-- form-area -->
 
     <!-- =======================================================
-         SIDEBAR APPS (derecha - siempre visible)
+         SIDEBAR APPS (DERECHA)
     ======================================================= -->
-    <aside class="apps-sidebar" aria-label="Apps subidas">
+    <aside class="apps-sidebar">
+
       <div class="sidebar-header">
         <h3 class="panel-section-title">📦 Aplicaciones Publicadas</h3>
-        <input id="searchInput" type="search" placeholder="🔍 Buscar por nombre..." autocomplete="off">
+        <input id="searchInput" type="search" placeholder="🔍 Buscar por nombre...">
       </div>
 
-      <div class="apps-list-wrap" id="appsListWrap">
+      <div class="apps-list-wrap">
         <table class="apps-table">
           <thead>
             <tr>
@@ -193,13 +196,14 @@
         <div id="loadingMore" class="loading-more hidden">Cargando más apps...</div>
         <div id="noMore" class="no-more hidden">No hay más apps</div>
       </div>
+
     </aside>
 
   </div> <!-- admin-main -->
 
 </div> <!-- admin-container -->
 
-<!-- FIREBASE SCRIPTS -->
+<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -210,5 +214,3 @@
 
 </body>
 </html>
-
-
