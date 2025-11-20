@@ -132,11 +132,16 @@
             <input id="capturasUrl" type="text">
           </div>
 
-        <div class="form-group">
-          <label>Capturas secundarias</label>
-          <input id="capturas" type="file" accept="image/*" multiple hidden>
-          <label for="capturas" class="file-btn">Seleccionar</label>
-        </div>
+          <!-- 📌 Capturas secundarias -->
+          <div class="form-group">
+            <label>Capturas secundarias</label>
+
+            <div class="file-container">
+              <input id="capturasTexto" type="text" class="file-box" placeholder="No se seleccionó archivo" disabled>
+              <input id="capturas" type="file" accept="image/*" multiple hidden>
+              <label for="capturas" class="file-btn">Seleccionar</label>
+            </div>
+          </div>
 
           <div class="form-group">
             <label>Edad recomendada</label>
@@ -148,10 +153,15 @@
             <input id="iconoUrl" type="text">
           </div>
 
+          <!-- 📌 APK -->
           <div class="form-group">
             <label>APK (subir nueva)</label>
-            <input id="apk" type="file" accept=".apk" hidden>
-            <label for="apk" class="file-btn">Seleccionar</label>
+
+            <div class="file-container">
+              <input id="apkTexto" type="text" class="file-box" placeholder="No se seleccionó archivo" disabled>
+              <input id="apk" type="file" accept=".apk" hidden>
+              <label for="apk" class="file-btn">Seleccionar</label>
+            </div>
           </div>
 
           <div class="form-group">
@@ -164,11 +174,16 @@
             <input id="apkUrl" type="text">
           </div>
 
+          <!-- 📌 Imagen -->
           <div class="form-group">
             <label>Imagen</label>
-            <input id="imagen" type="file" accept="image/*" hidden>
-            <label for="imagen" class="file-btn">Seleccionar</label>
-        </div>
+
+            <div class="file-container">
+              <input id="imagenTexto" type="text" class="file-box" placeholder="No se seleccionó archivo" disabled>
+              <input id="imagen" type="file" accept="image/*" hidden>
+              <label for="imagen" class="file-btn">Seleccionar</label>
+            </div>
+          </div>
 
         </div>
       </div>
@@ -184,7 +199,6 @@
         <input id="searchInput" type="search" placeholder="🔍 Buscar por nombre...">
       </div>
 
-      <!-- 🔥 AÑADÍ EL ID QUE NECESITABA PARA QUE SE MUESTREN LAS APPS -->
       <div id="appsListWrap" class="apps-list-wrap">
 
         <table class="apps-table">
@@ -210,7 +224,7 @@
 
 </div>
 
-<!-- FIREBASE -->
+<!-- Scripts Firebase -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -219,6 +233,24 @@
 <script src="firebase.js"></script>
 <script src="admin.js"></script>
 
+<!-- SCRIPT PARA MOSTRAR NOMBRE DEL ARCHIVO -->
+<script>
+document.getElementById("imagen").addEventListener("change", function() {
+  document.getElementById("imagenTexto").value = this.files.length ? this.files[0].name : "";
+});
+
+document.getElementById("apk").addEventListener("change", function() {
+  document.getElementById("apkTexto").value = this.files.length ? this.files[0].name : "";
+});
+
+document.getElementById("capturas").addEventListener("change", function() {
+  if (this.files.length > 1) {
+    document.getElementById("capturasTexto").value = this.files.length + " archivos seleccionados";
+  } else {
+    document.getElementById("capturasTexto").value = this.files.length ? this.files[0].name : "";
+  }
+});
+</script>
+
 </body>
 </html>
-
