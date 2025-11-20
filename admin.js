@@ -394,3 +394,22 @@ function cancelarEdicion() {
 document.addEventListener('DOMContentLoaded', () => {
   loadInitialApps();
 });
+
+// Función para actualizar el nombre del archivo en los botones de selección
+function updateFileName(inputId, labelId) {
+  const input = document.getElementById(inputId);
+  const label = document.getElementById(labelId);
+  
+  input.addEventListener('change', function() {
+    const fileName = input.files[0] ? input.files[0].name : 'Seleccionar';
+    label.textContent = fileName; // Cambia el texto del botón
+  });
+}
+
+// Llamar a la función para cada uno de los campos de archivo
+document.addEventListener('DOMContentLoaded', () => {
+  updateFileName('imagen', 'imagenLabel');
+  updateFileName('apk', 'apkLabel');
+  updateFileName('capturas', 'capturasLabel');
+});
+
