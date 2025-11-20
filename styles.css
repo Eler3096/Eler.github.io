@@ -730,14 +730,14 @@ body {
 
 .install-share-row button {
   border: none;
-  background: white;
+  background: transparent;
   padding: 8px;
   cursor: pointer;
 }
 
 .install-share-row button img {
   width: 90px;
-  height: 60px;
+  height: 30px;
   object-fit: contain;
   transition: transform 0.2s;
 }
@@ -745,5 +745,6 @@ body {
 .install-share-row button:hover img {
   transform: scale(1.1);
 }
+
 
 
