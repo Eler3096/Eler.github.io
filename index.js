@@ -238,9 +238,7 @@ function openDetails(app) {
 
         renderApps();
 
-       // AHORA:
-          window.location.href = url;
-
+        window.location.href = url;
 
         setTimeout(() => {
           installBtn.disabled = false;
@@ -248,6 +246,44 @@ function openDetails(app) {
         }, 1000);
       });
   };
+
+  // ===== ENLACES OPCIONALES (PlayStore, Uptodown, Mega, Mediafire) =====
+  const playstoreBtn = document.getElementById("playstoreBtn");
+  const uptodownBtn = document.getElementById("uptodownBtn");
+  const megaBtn = document.getElementById("megaBtn");
+  const mediafireBtn = document.getElementById("mediafireBtn");
+
+  // PLAYSTORE
+  if (app.playstore && app.playstore.trim() !== "") {
+    playstoreBtn.style.display = "inline-block";
+    playstoreBtn.onclick = () => window.open(app.playstore, "_blank");
+  } else {
+    playstoreBtn.style.display = "none";
+  }
+
+  // UPTODOWN
+  if (app.uptodown && app.uptodown.trim() !== "") {
+    uptodownBtn.style.display = "inline-block";
+    uptodownBtn.onclick = () => window.open(app.uptodown, "_blank");
+  } else {
+    uptodownBtn.style.display = "none";
+  }
+
+  // MEGA
+  if (app.mega && app.mega.trim() !== "") {
+    megaBtn.style.display = "inline-block";
+    megaBtn.onclick = () => window.open(app.mega, "_blank");
+  } else {
+    megaBtn.style.display = "none";
+  }
+
+  // MEDIAFIRE
+  if (app.mediafire && app.mediafire.trim() !== "") {
+    mediafireBtn.style.display = "inline-block";
+    mediafireBtn.onclick = () => window.open(app.mediafire, "_blank");
+  } else {
+    mediafireBtn.style.display = "none";
+  }
 
   // compartir
   shareBtn.onclick = () => {
@@ -456,4 +492,3 @@ function handleSendReview() {
     alert("¡Tu reseña fue publicada!");
   });
 }
-
