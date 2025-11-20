@@ -32,7 +32,7 @@ let inSearchMode = false;
 let loadedAppsCache = [];
 
 // =======================================================
-// CARGA INICIAL: primeros PAGE_SIZE items
+// CARGA INICIAL
 // =======================================================
 function resetPagination() {
   lastVisible = null;
@@ -70,10 +70,8 @@ function loadMoreApps() {
 
       const docs = snap.docs;
       lastVisible = docs[docs.length - 1];
-
       const items = docs.map(d => d.data());
       loadedAppsCache = loadedAppsCache.concat(items);
-
       renderApps(items, true);
 
       if (items.length < PAGE_SIZE) {
@@ -117,7 +115,6 @@ function renderApps(items, append = false) {
   }
 }
 
-// Función de escape para evitar inyección
 function escapeHtml(str) {
   return (str + '').replace(/[&<>"'`=\/]/g, function(s) {
     return ({
@@ -192,9 +189,6 @@ appsListWrap.addEventListener('scroll', () => {
 // =======================================================
 // CARGAR APP PARA EDITAR
 // =======================================================
-// =======================================================
-// CARGAR APP PARA EDITAR
-// =======================================================
 function cargarParaEditar(id) {
   editId = id;
   document.getElementById("formTitle").textContent = "✏️ Editar Aplicación";
@@ -227,6 +221,12 @@ function cargarParaEditar(id) {
     document.getElementById("size").value = a.size || "";
     prevSize = a.size || null;
 
+    // NUEVOS CAMPOS DE ENLACES
+    document.getElementById("playstoreUrl").value = a.playstoreUrl || "";
+    document.getElementById("uptodownUrl").value = a.uptodownUrl || "";
+    document.getElementById("megaUrl").value = a.megaUrl || "";
+    document.getElementById("mediafireUrl").value = a.mediafireUrl || "";
+
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
@@ -238,13 +238,12 @@ function cargarFormularioNuevo() {
   limpiarFormulario();
   document.getElementById("formTitle").textContent = "➕ Nueva Aplicación";
   document.getElementById("subirBtn").textContent = "SUBIR APP";
-  document.getElementById("cancelarBtn").classList.add("hidden"); // Ocultar el botón de cancelar por defecto
+  document.getElementById("cancelarBtn").classList.add("hidden");
 
-  // Agregar el evento para mostrar el botón "Cancelar" cuando el usuario empiece a escribir
   const inputs = document.querySelectorAll("input, textarea, select");
   inputs.forEach(input => {
     input.addEventListener('input', function() {
-      document.getElementById("cancelarBtn").classList.remove("hidden"); // Mostrar el botón "Cancelar"
+      document.getElementById("cancelarBtn").classList.remove("hidden");
     });
   });
 }
@@ -276,7 +275,12 @@ async function guardarApp() {
     imagen: imagenUrl.value.trim(),
     apk: apkUrl.value.trim(),
     size: size.value.trim() || "N/A",
-    imgSecundarias: capturasUrl.value.split(",").map(u => u.trim()).filter(u => u !== "")
+    imgSecundarias: capturasUrl.value.split(",").map(u => u.trim()).filter(u => u !== ""),
+    // NUEVOS CAMPOS
+    playstoreUrl: playstoreUrl.value.trim(),
+    uptodownUrl: uptodownUrl.value.trim(),
+    megaUrl: megaUrl.value.trim(),
+    mediafireUrl: mediafireUrl.value.trim()
   };
 
   if (!campos.nombre || !campos.descripcion || !campos.version) {
@@ -289,9 +293,7 @@ async function guardarApp() {
   const imagenFile = imagen.files[0];
   const apkFile = apk.files[0];
   const capturasFiles = capturas.files;
-
   const storageRef = firebase.storage().ref();
-
   let promesas = [];
 
   if (imagenFile) {
@@ -343,9 +345,7 @@ async function guardarApp() {
       editId = null;
       document.getElementById("formTitle").textContent = "➕ Nueva Aplicación";
       btn.textContent = "SUBIR APP";
-
       limpiarFormulario();
-
       if (!inSearchMode) {
         loadInitialApps();
       } else {
@@ -388,7 +388,7 @@ function cancelarEdicion() {
   limpiarFormulario();
   document.getElementById("formTitle").textContent = "➕ Nueva Aplicación";
   document.getElementById("subirBtn").textContent = "SUBIR APP";
-  document.getElementById("cancelarBtn").classList.add("hidden");  // Ocultar el botón de cancelar
+  document.getElementById("cancelarBtn").classList.add("hidden");
   editId = null;
 }
 
@@ -397,27 +397,21 @@ function cancelarEdicion() {
 // =======================================================
 document.addEventListener('DOMContentLoaded', () => {
   loadInitialApps();
-  cargarFormularioNuevo();  // Mostrar el formulario para crear una nueva aplicación al cargar
+  cargarFormularioNuevo();
+  updateFileName('imagen', 'imagenLabel');
+  updateFileName('apk', 'apkLabel');
+  updateFileName('capturas', 'capturasLabel');
 });
 
+// =======================================================
 // Función para actualizar el nombre del archivo en los botones de selección
+// =======================================================
 function updateFileName(inputId, labelId) {
   const input = document.getElementById(inputId);
   const label = document.getElementById(labelId);
   
   input.addEventListener('change', function() {
     const fileName = input.files[0] ? input.files[0].name : 'Seleccionar';
-    label.textContent = fileName; // Cambia el texto del botón
+    label.textContent = fileName;
   });
 }
-
-// Llamar a la función para cada uno de los campos de archivo
-document.addEventListener('DOMContentLoaded', () => {
-  updateFileName('imagen', 'imagenLabel');
-  updateFileName('apk', 'apkLabel');
-  updateFileName('capturas', 'capturasLabel');
-});
-
-
-
-
