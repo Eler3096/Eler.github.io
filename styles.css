@@ -727,3 +727,21 @@ body {
   border-color: rgba(59,130,246,0.9);
   color: #fff;
 }
+
+.install-share-row button {
+  border: none;
+  background: transparent;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.install-share-row button img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  transition: transform 0.2s;
+}
+
+.install-share-row button:hover img {
+  transform: scale(1.1);
+}
