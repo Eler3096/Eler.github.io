@@ -1,4 +1,4 @@
-/* ===================================================
+asi? /* ===================================================
    RESET
 =================================================== */
 html, body {
@@ -397,20 +397,30 @@ textarea {
   margin-bottom: 12px;
 }
 
-
 /* ===================================================
   cambio de nombre de selectores
 =================================================== */
 
 .file-btn {
   display: inline-block;
-  padding: 5px 16px;
-  background: #0f172a,
+  padding: 8px 16px;
+  background: #2563eb;
   color: white;
   border-radius: 6px;
+  cursor: pointer;
   font-size: 14px;
   margin-top: 6px;
 }
+
+.file-btn:hover {
+  background: #1e4db7;
+}
+
+
+
+
+
+
 
 
 
