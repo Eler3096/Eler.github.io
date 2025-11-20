@@ -204,6 +204,7 @@ function cargarParaEditar(id) {
 
   document.getElementById("formTitle").textContent = "✏️ Editar Aplicación";
   document.getElementById("subirBtn").textContent = "GUARDAR";
+  document.getElementById("cancelarBtn").classList.remove("hidden");  // Mostrar el botón de cancelar
 
   db.collection("apps").doc(id).get().then(doc => {
     const a = doc.data();
@@ -258,10 +259,8 @@ function eliminarApp(id) {
 
 // =======================================================
 // GUARDAR / EDITAR APP
-// (se mantiene la lógica que tenías, con subida de archivos)
 // =======================================================
 async function guardarApp() {
-
   const btn = document.getElementById("subirBtn");
   const estado = document.getElementById("estado");
 
@@ -365,13 +364,13 @@ async function guardarApp() {
       document.getElementById("formTitle").textContent = "➕ Nueva Aplicación";
       btn.textContent = "SUBIR APP";
 
+      // Limpiar formulario
       limpiarFormulario();
 
-      // actualizar UI: si no estamos en búsqueda, recargar inicial para ver cambios
+      // Actualizar UI: si no estamos en búsqueda, recargar inicial para ver cambios
       if (!inSearchMode) {
         loadInitialApps();
       } else {
-        // si estamos en búsqueda, refrescar la búsqueda actual
         const currentSearch = searchInput.value.trim();
         if (currentSearch) performSearch(currentSearch);
       }
@@ -394,7 +393,7 @@ function limpiarFormulario() {
   internet.value = "offline";
   anuncios.value = "no";
 
-  // reset archivos
+  // Resetear archivos
   const imagenEl = document.getElementById("imagen");
   const apkEl = document.getElementById("apk");
   const capturasEl = document.getElementById("capturas");
