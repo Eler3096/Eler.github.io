@@ -135,11 +135,10 @@
           <!-- 📌 Capturas secundarias -->
           <div class="form-group">
             <label>Capturas secundarias</label>
-
-            <div class="file-container">
-              <input id="capturasTexto" type="text" class="file-box" placeholder="No se seleccionó archivo" disabled>
+            <div class="file-unificado">
+              <label for="capturas" class="file-btn-full">Seleccionar</label>
+              <input id="capturasTexto" type="text" placeholder="No se seleccionó archivo" disabled>
               <input id="capturas" type="file" accept="image/*" multiple hidden>
-              <label for="capturas" class="file-btn">Seleccionar</label>
             </div>
           </div>
 
@@ -156,11 +155,10 @@
           <!-- 📌 APK -->
           <div class="form-group">
             <label>APK (subir nueva)</label>
-
-            <div class="file-container">
-              <input id="apkTexto" type="text" class="file-box" placeholder="No se seleccionó archivo" disabled>
+            <div class="file-unificado">
+              <label for="apk" class="file-btn-full">Seleccionar</label>
+              <input id="apkTexto" type="text" placeholder="No se seleccionó archivo" disabled>
               <input id="apk" type="file" accept=".apk" hidden>
-              <label for="apk" class="file-btn">Seleccionar</label>
             </div>
           </div>
 
@@ -177,11 +175,10 @@
           <!-- 📌 Imagen -->
           <div class="form-group">
             <label>Imagen</label>
-
-            <div class="file-container">
-              <input id="imagenTexto" type="text" class="file-box" placeholder="No se seleccionó archivo" disabled>
+            <div class="file-unificado">
+              <label for="imagen" class="file-btn-full">Seleccionar</label>
+              <input id="imagenTexto" type="text" placeholder="No se seleccionó archivo" disabled>
               <input id="imagen" type="file" accept="image/*" hidden>
-              <label for="imagen" class="file-btn">Seleccionar</label>
             </div>
           </div>
 
@@ -224,7 +221,7 @@
 
 </div>
 
-<!-- Scripts Firebase -->
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -233,23 +230,20 @@
 <script src="firebase.js"></script>
 <script src="admin.js"></script>
 
-<!-- SCRIPT PARA MOSTRAR NOMBRE DEL ARCHIVO -->
+<!-- Mostrar nombre archivo -->
 <script>
-document.getElementById("imagen").addEventListener("change", function() {
-  document.getElementById("imagenTexto").value = this.files.length ? this.files[0].name : "";
-});
+function setupFile(idInput, idText) {
+  document.getElementById(idInput).addEventListener("change", function() {
+    const txt = document.getElementById(idText);
+    if (!this.files.length) txt.value = "";
+    else if (this.files.length === 1) txt.value = this.files[0].name;
+    else txt.value = this.files.length + " archivos seleccionados";
+  });
+}
 
-document.getElementById("apk").addEventListener("change", function() {
-  document.getElementById("apkTexto").value = this.files.length ? this.files[0].name : "";
-});
-
-document.getElementById("capturas").addEventListener("change", function() {
-  if (this.files.length > 1) {
-    document.getElementById("capturasTexto").value = this.files.length + " archivos seleccionados";
-  } else {
-    document.getElementById("capturasTexto").value = this.files.length ? this.files[0].name : "";
-  }
-});
+setupFile("imagen", "imagenTexto");
+setupFile("apk", "apkTexto");
+setupFile("capturas", "capturasTexto");
 </script>
 
 </body>
