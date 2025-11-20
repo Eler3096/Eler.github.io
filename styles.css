@@ -711,35 +711,38 @@ body {
    ================================================== */
 .install-share-row button {
   background: transparent;
-  padding: 2px;
   cursor: pointer;
 
-  /* 🔥 Borde blanco */
-  border: 2px solid #ffffff;
+  /* ❌ Quitar padding para que la imagen toque el borde */
+  padding: 0;
 
-  /* 🔥 Bordes redondeados */
-  border-radius: 8px;
+  /* ✔️ Borde blanco o dorado */
+  border: 2px solid #ffffff; /* o #d4af37 para dorado */
+  border-radius: 5px;
 
-  /* Para que el borde rodee bien al contenido */
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  /* Evita que el botón se deforme */
-  width: auto;
+  /* Para que no aparezca espacio extra */
+  overflow: hidden;
 }
+
 
 
 .install-share-row button img {
   width: 90px;
   height: 30px;
   object-fit: contain;
-  border-radius: 8px;
   transition: transform 0.2s;
+  display: block; /* 👈 importante: evita espacio debajo de img */
+}
+
+.install-share-row button:hover img {
+  transform: scale(1.1);
 }
 
 
-}
 
 
 
