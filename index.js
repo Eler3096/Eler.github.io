@@ -56,11 +56,8 @@ let reviewStarsSelected = 0;
 const VOTES_KEY = "appsmart_votes";
 
 function getVotes() {
-  try {
-    return JSON.parse(localStorage.getItem(VOTES_KEY) || "{}");
-  } catch {
-    return {};
-  }
+  try { return JSON.parse(localStorage.getItem(VOTES_KEY) || "{}"); } 
+  catch { return {}; }
 }
 
 function saveVotes(v) {
@@ -212,10 +209,23 @@ function openDetails(app) {
 
   // ===== Descargar APK =====
   installBtn.onclick = () => downloadAndIncrement(app.apk, installBtn);
-  if (app.playstore && app.playstore.trim() !== "") { playstoreBtn.style.display = "inline-block"; playstoreBtn.onclick = () => downloadAndIncrement(app.playstore, playstoreBtn); } else playstoreBtn.style.display = "none";
-  if (app.uptodown && app.uptodown.trim() !== "") { uptodownBtn.style.display = "inline-block"; uptodownBtn.onclick = () => downloadAndIncrement(app.uptodown, uptodownBtn); } else uptodownBtn.style.display = "none";
-  if (app.mega && app.mega.trim() !== "") { megaBtn.style.display = "inline-block"; megaBtn.onclick = () => downloadAndIncrement(app.mega, megaBtn); } else megaBtn.style.display = "none";
-  if (app.mediafire && app.mediafire.trim() !== "") { mediafireBtn.style.display = "inline-block"; mediafireBtn.onclick = () => downloadAndIncrement(app.mediafire, mediafireBtn); } else mediafireBtn.style.display = "none";
+
+  // ===== Botones extra dinámicos =====
+  const botones = [
+    {btn: playstoreBtn, url: app.playstoreUrl},
+    {btn: uptodownBtn, url: app.uptodownUrl},
+    {btn: megaBtn, url: app.megaUrl},
+    {btn: mediafireBtn, url: app.mediafireUrl},
+  ];
+
+  botones.forEach(({btn, url}) => {
+    if (url && url.trim() !== "") {
+      btn.style.display = "inline-block";
+      btn.onclick = () => downloadAndIncrement(url, btn);
+    } else {
+      btn.style.display = "none";
+    }
+  });
 
   // compartir
   shareBtn.onclick = () => {
