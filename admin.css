@@ -397,19 +397,8 @@ textarea {
   margin-bottom: 12px;
 }
 
-/* ===================================================
-  cambio de nombre de selectores
-=================================================== */
 
-.file-btn {
-  display: inline-block;
-  padding: 5px 16px;
-  background: #ffffff; /* Blanco */
-  color: black;
-  border-radius: 6px;
-  font-size: 14px;
-  margin-top: 6px;
-}
+
 
 
 
