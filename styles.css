@@ -710,23 +710,16 @@ body {
   botnes imagen
    ================================================== */
 .install-share-row button {
-  background: transparent;
-  cursor: pointer;
-
-  /* ❌ Quitar padding para que la imagen toque el borde */
+  width: 189px;   /* 10% del tamaño real */
+  height: 71px;   /* 10% del tamaño real */
   padding: 0;
-
-  /* ✔️ Borde blanco o dorado */
-  border: 2px solid #ffffff; /* o #d4af37 para dorado */
-  border-radius: 5px;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  /* Para que no aparezca espacio extra */
+  border: 2px solid #ffffff;
+  border-radius: 12px;
+  background: transparent;
   overflow: hidden;
+  cursor: pointer;
 }
+
 
 
 
@@ -741,6 +734,7 @@ body {
 .install-share-row button:hover img {
   transform: scale(1.1);
 }
+
 
 
 
