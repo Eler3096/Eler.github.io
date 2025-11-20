@@ -447,7 +447,6 @@ body {
   filter: brightness(1.05);
 }
 
-
 .detail-stats {
   font-size:0.8rem;
   color:#9ca3af;
@@ -495,12 +494,12 @@ body {
   color:#e5e7eb;
   margin-bottom:10px;
 }
-/* Añadir un margen superior para separar las imágenes del campo de descripción */
+
 .screenshots-row {
   display: flex;
   gap: 10px;
   overflow-x: auto;
-  margin-top: 20px; /* Espacio vertical entre el campo "Descripción" y las imágenes */
+  margin-top: 20px;
 }
 
 .screenshots-row img {
@@ -509,7 +508,6 @@ body {
   object-fit: cover;
   border-radius: 14px;
 }
-
 
 /* ===== GRAFICO DE ESTRELLAS ===== */
 .stars-graph {
@@ -569,8 +567,6 @@ body {
   transition: width 0.4s ease;
 }
 
-
-/* Reseñas */
 /* Reseñas */
 .review-form {
   background: rgba(255,255,255,0.04);
@@ -580,20 +576,20 @@ body {
   border: 1px solid rgba(75,85,99,0.5);
 }
 h2 {
-  margin-top: 10px !important;  /* Espacio superior desde el contenido anterior */
-  margin-bottom: 10px !important;  /* Espacio inferior hacia el cuadro de reseñas */
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
   font-size: 1.2rem;
   font-weight: 600;
   color: #e5e7eb;
 }
 .review-form h3 {
   font-size: 0.95rem;
-  margin-bottom: 8px; /* Espacio entre el título y el formulario */
+  margin-bottom: 8px;
 }
 
 .review-form label {
   display:block;
-  font-size: 0.8rem;
+  font-size:0.8rem;
   margin-bottom: 10px;
   color:#cbd5f5;
 }
@@ -621,9 +617,8 @@ h2 {
   padding: 12px;
   border-radius: 12px;
   border: 1px solid rgba(75,85,99,0.4);
-  margin-top: 14px; /* Espacio entre las reseñas */
+  margin-top: 14px;
 }
-
 
 .review-stars {
   color: #facc15;
@@ -639,12 +634,11 @@ h2 {
 .review-time {
   margin-top: 4px;
   font-size: 0.75rem;
-  color: #94a3b8; 
+  color: #94a3b8;
 }
 
 html, body {
   height: 100%;
-  
 }
 
 body {
@@ -655,16 +649,16 @@ body {
 .store-footer {
   margin-top: auto;
 }
+
 /* color estrellas */
 .star-static {
-  color: #FFD700; /* amarillo Google Play */
+  color: #FFD700;
   font-size: 26px;
   margin-right: 4px;
-  pointer-events: none; /* evita clics */
+  pointer-events: none;
 }
 
-/* ===== INFORMACIÓN EN CUADRICULA (CORREGIDO) ===== */
-
+/* ===== INFORMACIÓN EN CUADRICULA ===== */
 .info-grid {
   margin: 18px 0;
   display: grid;
@@ -672,22 +666,19 @@ body {
   gap: 14px;
 }
 
-/* Caja individual */
 .info-box {
   background: rgba(255,255,255,0.04);
   padding: 12px 14px;
   border-radius: 12px;
   border: 1px solid rgba(75,85,99,0.4);
-
-  /* NUEVO */
   display: grid;
   grid-template-columns: 30px 1fr;
   column-gap: 10px;
-  align-items: center; /* centra verticalmente el icono */
+  align-items: center;
 }
 
 .info-icon {
-  font-size: 1.6rem;   /* más grande */
+  font-size: 1.6rem;
   color: #facc15;
   display: flex;
   justify-content: center;
@@ -704,15 +695,31 @@ body {
 .info-value {
   font-size: 0.88rem;
   color: #e5e7eb;
-  margin-top: 2px;
 }
 
+/* ==================================================
+   ESTILOS NUEVOS PARA LOS BOTONES OPCIONALES
+   ================================================== */
 
+.playstore-btn,
+.uptodown-btn,
+.mega-btn,
+.mediafire-btn {
+  background: rgba(15,23,42,0.9);
+  border: 1px solid rgba(75,85,99,0.8);
+  border-radius: 12px;
+  padding: 10px 20px;
+  color: #e5e7eb;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: none; /* Se muestran solo si hay enlace */
+  transition: 0.15s ease;
+}
 
-
-
-
-
-
-
-
+.playstore-btn:hover,
+.uptodown-btn:hover,
+.mega-btn:hover,
+.mediafire-btn:hover {
+  border-color: rgba(59,130,246,0.9);
+  color: #fff;
+}
