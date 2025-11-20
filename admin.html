@@ -177,9 +177,14 @@
 
           <!-- 📌 Imagen (CORREGIDO) -->
           <div class="form-group">
-            <label>Imagen</label>
-            <input id="imagen" type="file" accept="image/*" class="file-box">
-          </div>
+  <label>Imagen</label>
+  <div class="file-box-wrap">
+    <label class="file-btn-clean" for="imagen">Seleccionar</label>
+    <input id="imagenTexto" class="file-text" type="text" placeholder="No se seleccionó archivo" disabled>
+    <input id="imagen" type="file" accept="image/*" hidden>
+  </div>
+</div>
+
 
         </div>
       </div>
@@ -231,3 +236,4 @@
 
 </body>
 </html>
+
