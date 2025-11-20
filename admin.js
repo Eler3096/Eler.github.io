@@ -192,11 +192,14 @@ appsListWrap.addEventListener('scroll', () => {
 // =======================================================
 // CARGAR APP PARA EDITAR
 // =======================================================
+// =======================================================
+// CARGAR APP PARA EDITAR
+// =======================================================
 function cargarParaEditar(id) {
   editId = id;
   document.getElementById("formTitle").textContent = "✏️ Editar Aplicación";
   document.getElementById("subirBtn").textContent = "GUARDAR";
-  document.getElementById("cancelarBtn").classList.remove("hidden");
+  document.getElementById("cancelarBtn").classList.remove("hidden");  // Mostrar el botón de cancelar
 
   db.collection("apps").doc(id).get().then(doc => {
     const a = doc.data();
@@ -229,19 +232,16 @@ function cargarParaEditar(id) {
 }
 
 // =======================================================
-// ELIMINAR APP
+// CARGAR FORMULARIO DE NUEVA APP
 // =======================================================
-function eliminarApp(id) {
-  if (!confirm("¿Eliminar esta aplicación?")) return;
+function cargarFormularioNuevo() {
+  // Limpiar el formulario
+  limpiarFormulario();
 
-  db.collection("apps").doc(id).delete()
-  .then(() => {
-    alert("Aplicación eliminada ✔");
-    const row = document.getElementById(`app-row-${id}`);
-    if (row) row.remove();
-    loadedAppsCache = loadedAppsCache.filter(a => a.id !== id);
-  })
-  .catch(err => alert("Error: " + err.message));
+  // Mostrar el título y el botón de "Subir" para crear una nueva aplicación
+  document.getElementById("formTitle").textContent = "➕ Nueva Aplicación";
+  document.getElementById("subirBtn").textContent = "SUBIR APP";
+  document.getElementById("cancelarBtn").classList.remove("hidden");  // Mostrar el botón de cancelar
 }
 
 // =======================================================
@@ -392,6 +392,7 @@ function cancelarEdicion() {
 // =======================================================
 document.addEventListener('DOMContentLoaded', () => {
   loadInitialApps();
+  cargarFormularioNuevo();  // Mostrar el formulario para crear una nueva aplicación al cargar
 });
 
 // Función para actualizar el nombre del archivo en los botones de selección
@@ -411,3 +412,5 @@ document.addEventListener('DOMContentLoaded', () => {
   updateFileName('apk', 'apkLabel');
   updateFileName('capturas', 'capturasLabel');
 });
+
+
