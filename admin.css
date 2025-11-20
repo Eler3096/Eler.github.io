@@ -406,11 +406,12 @@ textarea {
   display: inline-block;
   padding: 5px 16px;
   background: #e5e7eb; /* Blanco */
-  color: white;
+  color: #e5e7eb;
   border-radius: 6px;
   font-size: 14px;
   margin-top: 6px;
 }
+
 
 
 
