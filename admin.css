@@ -408,6 +408,8 @@ textarea {
   color: white; /* Texto blanco */
   font-size: 14px;
   margin-top: 6px;
-  border-color: #3b82f6;
+  border: 1px solid rgba(55,65,81,0.9);
+  border-radius: 6px;
   cursor: pointer; /* Aparece como un puntero cuando se pasa el mouse sobre él */
 }
+
