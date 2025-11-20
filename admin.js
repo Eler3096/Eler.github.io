@@ -199,7 +199,7 @@ function cargarParaEditar(id) {
   editId = id;
   document.getElementById("formTitle").textContent = "✏️ Editar Aplicación";
   document.getElementById("subirBtn").textContent = "GUARDAR";
-  document.getElementById("cancelarBtn").classList.remove("hidden");  // Mostrar el botón de cancelar
+  document.getElementById("cancelarBtn").classList.remove("hidden");
 
   db.collection("apps").doc(id).get().then(doc => {
     const a = doc.data();
@@ -235,13 +235,18 @@ function cargarParaEditar(id) {
 // CARGAR FORMULARIO DE NUEVA APP
 // =======================================================
 function cargarFormularioNuevo() {
-  // Limpiar el formulario
   limpiarFormulario();
-
-  // Mostrar el título y el botón de "Subir" para crear una nueva aplicación
   document.getElementById("formTitle").textContent = "➕ Nueva Aplicación";
   document.getElementById("subirBtn").textContent = "SUBIR APP";
-  document.getElementById("cancelarBtn").classList.remove("hidden");  // Mostrar el botón de cancelar
+  document.getElementById("cancelarBtn").classList.add("hidden"); // Ocultar el botón de cancelar por defecto
+
+  // Agregar el evento para mostrar el botón "Cancelar" cuando el usuario empiece a escribir
+  const inputs = document.querySelectorAll("input, textarea, select");
+  inputs.forEach(input => {
+    input.addEventListener('input', function() {
+      document.getElementById("cancelarBtn").classList.remove("hidden"); // Mostrar el botón "Cancelar"
+    });
+  });
 }
 
 // =======================================================
@@ -412,5 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateFileName('apk', 'apkLabel');
   updateFileName('capturas', 'capturasLabel');
 });
+
+
 
 
