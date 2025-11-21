@@ -412,16 +412,27 @@ body {
   border-radius:22px;
   object-fit:cover;
 }
-.install-btn {
-  background:linear-gradient(to right,#22c55e,#16a34a);
-  border:none;
-  border-radius:12px;
-  padding:10px 20px;
-  color:white;
-  font-size:0.95rem;
-  cursor:pointer;
-  margin-bottom:8px;
+.install-share-row button {
+  aspect-ratio: 1890 / 709;
+  width: 100px;
+  padding: 0;
+  border: 2px solid white;
+  border-radius: 12px;
+  overflow: hidden;
+  background: transparent;
+  cursor: pointer;
 }
+
+.install-share-row button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.install-share-row button:hover img {
+  transform: scale(1.1);
+}
+
 
 /* instalacion */
 .install-share-row {
@@ -734,6 +745,7 @@ body {
 .install-share-row button:hover img {
   transform: scale(1.1);
 }
+
 
 
 
