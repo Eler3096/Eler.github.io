@@ -61,7 +61,7 @@ body {
   align-items: center;
   gap: 6px;
   background: #020617;
-  border-radius: 999px;
+  border-radius: 8px;
   padding: 6px 10px;
   border: 1px solid rgba(75, 85, 99, 0.8);
   min-width: 220px;
@@ -81,22 +81,6 @@ body {
   width: 100%;
 }
 
-/* ===== LINK ADMIN ===== */
-.admin-link {
-  font-size: 0.8rem;
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(59, 130, 246, 0.8);
-  color: #bfdbfe;
-  text-decoration: none;
-  background: rgba(15,23,42,0.8);
-  transition: 0.15s ease;
-}
-.admin-link:hover {
-  background: rgba(37, 99, 235, 0.8);
-  color: white;
-}
-
 /* ===== CATEGORÍAS ===== */
 .categories-bar {
   padding: 8px 18px 4px;
@@ -108,9 +92,9 @@ body {
 }
 
 .chip {
-  border-radius: 999px;
+  border-radius: 8px;
   padding: 5px 12px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   border: 1px solid rgba(75,85,99,0.9);
   background: rgba(15,23,42,0.9);
   color: #cbd5f5;
@@ -745,9 +729,4 @@ body {
 .install-share-row button:hover img {
   transform: scale(1.1);
 }
-
-
-
-
-
 
