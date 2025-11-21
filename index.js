@@ -119,8 +119,8 @@ function renderApps() {
       <div class="play-info">
         <h3 class="play-name">${app.nombre}</h3>
         <p class="play-line1">${internet}</p>
-        <p class="play-line2">${starsText} • ❤️ ${likes} • ${size} </p>
-        <p class="play-line3">${descargas} Descargas</p>
+        <p class="play-line2">${starsText} • 👍 ${likes} • ${size} </p>
+        <p class="play-line3">⬇️${descargas} Descargas</p>
       </div>
     `;
 
@@ -368,5 +368,6 @@ function handleSendReview() {
     alert("¡Tu reseña fue publicada!");
   });
 }
+
 
 
