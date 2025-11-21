@@ -321,7 +321,7 @@ body {
 }
 .play-icon {
   width:64px;
-  height:64px;
+  height:74px;
   border-radius:16px;
   object-fit:cover;
 }
@@ -733,5 +733,6 @@ body {
 .install-share-row button:hover img {
   transform: scale(1.1);
 }
+
 
 
